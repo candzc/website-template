@@ -37,3 +37,30 @@ on, in every project derived from this template.
 
 This chain applies per reference URL given, not just once per project. If a
 project names a new reference mid-build, re-run the chain for that URL.
+
+## SEO plugin: claude-seo (AgriciDaniel)
+
+This repo installs `claude-seo@agricidaniel-claude-seo` as a proper Claude Code
+plugin (not loose vendored skill files). Both the marketplace source and the
+enabled-plugin flag are declared in `.claude/settings.json`, so any fresh
+session/clone of this repo auto-fetches and installs it the same way.
+
+All 25 of its sub-skills (`seo`, `seo-audit`, `seo-technical`, …) must carry
+`disable-model-invocation: true` in their `SKILL.md` frontmatter, so the model
+never auto-triggers them from a description match — they are reachable only
+explicitly via `/seo <command> …`.
+
+**Important caveat:** the upstream repo does NOT ship this flag by default.
+It has to be patched into the installed plugin's `SKILL.md` files after every
+`claude plugin install`/`claude plugin update` of `claude-seo`, because that
+patch lives in the local plugin cache (outside this repo, outside version
+control) and gets overwritten by a fresh pull from upstream. After installing
+or updating this plugin, add `disable-model-invocation: true` under the
+`name:` line of every `skills/*/SKILL.md` file in the installed plugin
+directory before relying on it — check with:
+
+```
+grep -L "^disable-model-invocation: true" <plugin-install-path>/skills/*/SKILL.md
+```
+
+Any file listed there still needs the line added.
