@@ -64,3 +64,18 @@ grep -L "^disable-model-invocation: true" <plugin-install-path>/skills/*/SKILL.m
 ```
 
 Any file listed there still needs the line added.
+
+## Import-Regel: Google AI Studio Exporte
+
+Wenn eine ZIP-Datei aus Google AI Studio importiert wird (Vite/React-Scaffold,
+erkennbar an `metadata.json`): Font-Stack und Design-Tokens IMMER gegen das
+Projekt-Standard (next/font/google-Setup, bestehende Farbwerte) abgleichen,
+nicht ungeprüft übernehmen. Enthaltene Komponenten (Three.js, Framer Motion
+o.ä.) dürfen übernommen werden, aber nur nach Anpassung an den bestehenden
+Font/Design-Standard.
+
+## Google Fonts / DSGVO-Sicherheitsnetz
+
+Google Fonts NIEMALS live von Google-Servern laden (DSGVO-Risiko durch
+IP-Übertragung). Immer `next/font/google` verwenden, damit Fonts beim Build
+selbst gehostet werden und keine Laufzeit-Anfragen an Google entstehen.
