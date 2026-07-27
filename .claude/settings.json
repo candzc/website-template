@@ -1,12 +1,19 @@
 {
   "enabledPlugins": {
-    "claude-seo@agricidaniel-claude-seo": true
+    "claude-seo@agricidaniel-claude-seo": true,
+    "banana-claude@banana-claude-marketplace": true
   },
   "extraKnownMarketplaces": {
     "agricidaniel-claude-seo": {
       "source": {
         "source": "github",
         "repo": "AgriciDaniel/claude-seo"
+      }
+    },
+    "banana-claude-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "AgriciDaniel/banana-claude"
       }
     }
   }
