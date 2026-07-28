@@ -79,3 +79,20 @@ Font/Design-Standard.
 Google Fonts NIEMALS live von Google-Servern laden (DSGVO-Risiko durch
 IP-Übertragung). Immer `next/font/google` verwenden, damit Fonts beim Build
 selbst gehostet werden und keine Laufzeit-Anfragen an Google entstehen.
+
+## Keine eigenmächtigen Qualitäts-Downgrades
+
+Build-Warnungen (Bundle-Größe, Chunk-Size, Performance-Hinweise) dürfen
+NIEMALS dazu führen, dass eine Animation, ein 3D-Effekt oder ein
+visuelles Feature entfernt, vereinfacht oder durch eine geringerwertige
+Alternative ersetzt wird — ohne das vorher explizit mit dem Nutzer
+abzustimmen.
+
+Stattdessen gilt: Erst Lösungen suchen, die die Qualität erhalten
+(z. B. Lazy-Loading, Code-Splitting, dynamischer Import nur auf der
+betroffenen Seite/Komponente, statt komplettem Entfernen).
+
+Falls wirklich keine Lösung ohne Qualitätsverlust möglich ist: Die
+Kompromisse dem Nutzer konkret vorlegen und auf eine Entscheidung warten
+— nicht einfach die einfachste/kleinste Variante eigenständig wählen
+und als erledigt melden.
