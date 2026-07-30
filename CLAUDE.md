@@ -80,6 +80,22 @@ Google Fonts NIEMALS live von Google-Servern laden (DSGVO-Risiko durch
 IP-Übertragung). Immer `next/font/google` verwenden, damit Fonts beim Build
 selbst gehostet werden und keine Laufzeit-Anfragen an Google entstehen.
 
+## Platzhalterbilder: Pexels-API
+
+Solange keine echte Foto- oder KI-Bildgenerierung für ein Projekt verfügbar
+ist, dürfen Platzhalterbilder über die kostenlose Pexels-API eingebunden
+werden (Key liegt als `PEXELS_API_KEY` vor).
+
+Jedes so eingebundene Bild muss sichtbar als Platzhalter markiert sein:
+- ein Kommentar direkt an der Einbindungsstelle im Code, der auf Pexels als
+  Quelle und den Platzhalter-Charakter hinweist, und
+- ein Dateiname-Präfix `placeholder-` für lokal gespeicherte/heruntergeladene
+  Bilddateien.
+
+Sobald echtes Bildmaterial (Fotos oder KI-Generierung) verfügbar ist, müssen
+die Pexels-Platzhalter ersetzt werden — sie sind nicht für den produktiven
+Einsatz gedacht.
+
 ## Keine eigenmächtigen Qualitäts-Downgrades
 
 Build-Warnungen (Bundle-Größe, Chunk-Size, Performance-Hinweise) dürfen
