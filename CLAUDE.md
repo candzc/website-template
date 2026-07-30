@@ -45,25 +45,35 @@ plugin (not loose vendored skill files). Both the marketplace source and the
 enabled-plugin flag are declared in `.claude/settings.json`, so any fresh
 session/clone of this repo auto-fetches and installs it the same way.
 
-All 25 of its sub-skills (`seo`, `seo-audit`, `seo-technical`, …) must carry
-`disable-model-invocation: true` in their `SKILL.md` frontmatter, so the model
-never auto-triggers them from a description match — they are reachable only
-explicitly via `/seo <command> …`.
+**Entscheidung vom 2026-07-30 (bewusst vom Nutzer getroffen):** Die
+`claude-seo`-Skills (`seo`, `seo-audit`, `seo-technical`, …) dürfen ab jetzt
+**automatisch** von Claude Code ausgelöst werden, wenn eine Anweisung im
+Prompt oder in dieser CLAUDE.md dazu passt — nicht mehr nur manuell per
+`/seo <command> …`. Die vorherige Pflicht, `disable-model-invocation: true`
+nach jedem `claude plugin install`/`claude plugin update` manuell in alle
+`SKILL.md`-Dateien nachzutragen, **entfällt bewusst** für dieses Plugin.
 
-**Important caveat:** the upstream repo does NOT ship this flag by default.
-It has to be patched into the installed plugin's `SKILL.md` files after every
-`claude plugin install`/`claude plugin update` of `claude-seo`, because that
-patch lives in the local plugin cache (outside this repo, outside version
-control) and gets overwritten by a fresh pull from upstream. After installing
-or updating this plugin, add `disable-model-invocation: true` under the
-`name:` line of every `skills/*/SKILL.md` file in the installed plugin
-directory before relying on it — check with:
+**Begründung/Abwägung:** Komfort (automatisches Auslösen ohne manuellen
+`/seo`-Befehl, z. B. aus einer Standing-Procedure heraus) wurde gegenüber dem
+Risiko unkontrolliert startender, ressourcenintensiver Läufe (Crawls über bis
+zu 500 Seiten, bis zu 15 parallele Subagents bei `seo-audit`) bewusst
+priorisiert. Das Risiko wird nicht ignoriert, sondern durch die
+Ankündigungspflicht im nächsten Abschnitt kompensiert.
 
-```
-grep -L "^disable-model-invocation: true" <plugin-install-path>/skills/*/SKILL.md
-```
+**Sicherheitsregel — Ankündigungspflicht vor automatischem Start:** Bevor ein
+automatisch ausgelöster (nicht explizit per `/seo …` angeforderter)
+`claude-seo`-Skill tatsächlich zu laufen beginnt — insbesondere jeder Skill,
+der einen mehrseitigen Crawl und/oder mehrere parallele Subagents startet,
+wie `seo-audit` — MUSS Claude Code das dem Nutzer vorher kurz ankündigen,
+z. B.:
 
-Any file listed there still needs the line added.
+> „Starte jetzt automatisch einen vollständigen SEO-Audit mit bis zu 15
+> Agents über bis zu 500 Seiten."
+
+Diese Ankündigung ist knapp zu halten (ein Satz, Umfang/Größenordnung der
+Operation nennen), muss aber immer VOR dem eigentlichen Start erfolgen — nie
+erst danach oder gar nicht. So läuft nie eine große, ressourcenintensive
+Operation unbemerkt im Hintergrund los.
 
 ## Import-Regel: Google AI Studio Exporte
 
