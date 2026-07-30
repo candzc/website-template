@@ -122,3 +122,19 @@ Falls wirklich keine Lösung ohne Qualitätsverlust möglich ist: Die
 Kompromisse dem Nutzer konkret vorlegen und auf eine Entscheidung warten
 — nicht einfach die einfachste/kleinste Variante eigenständig wählen
 und als erledigt melden.
+
+## Standard-Stack: Astro
+
+Für neue Projekte aus diesem Template gilt **Astro** als Standard-Framework,
+sofern der Kunde/Nutzer nicht ausdrücklich etwas anderes fordert. Begründung:
+Astro passt am besten zu Marketing-/Unternehmens-Websites — schnell,
+größtenteils statisch, SEO-stark — und nutzt für aufwändige Animationen das
+Islands-Pattern als bereits bewährte Lazy-Loading-Lösung (siehe
+„Keine eigenmächtigen Qualitäts-Downgrades" oben: dynamischer Import nur auf
+der betroffenen Seite/Komponente, statt komplettem Entfernen).
+
+**Ausnahme:** Braucht der Kunde etwas wirklich App-artiges — Login-Bereich,
+komplexe Zustandslogik, Kundenportal — wird stattdessen **Next.js/React**
+gewählt. Diese Abweichung vom Standard-Stack muss dem Nutzer gegenüber
+ausdrücklich benannt werden (kurz erklären, welches App-artige Merkmal die
+Abweichung auslöst), nicht stillschweigend erfolgen.
