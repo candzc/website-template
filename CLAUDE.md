@@ -138,3 +138,34 @@ komplexe Zustandslogik, Kundenportal — wird stattdessen **Next.js/React**
 gewählt. Diese Abweichung vom Standard-Stack muss dem Nutzer gegenüber
 ausdrücklich benannt werden (kurz erklären, welches App-artige Merkmal die
 Abweichung auslöst), nicht stillschweigend erfolgen.
+
+## Pflicht-Selbstcheck vor jeder Überschriften-Outline
+
+Grund: Beide Fehler unten sind in echten Projekten bereits passiert, obwohl
+die zugrundeliegenden Regeln schon im `seo-website-rework`-Skill standen —
+das Problem war nicht die fehlende Regel, sondern dass sie nicht zuverlässig
+angewendet wurde, bevor eine Outline rausging. Deshalb gilt dieser Check ab
+sofort für JEDES Projekt aus diesem Template, automatisch, nicht nur auf
+Nachfrage.
+
+Bevor du eine H1-H4-Outline zur Freigabe vorlegst, prüfe JEDE einzelne
+Überschrift gegen:
+
+1. **Echter Wortlaut statt Slot-Name.** Ist es der tatsächlich geplante
+   Wortlaut der Überschrift — NICHT eine Funktionsbeschreibung, ein
+   Architektur-Slot-Name oder ein Platzhalter-Label? "Kurzvorstellung +
+   Kontakt-Kurzhinweis" ist KEIN gültiger Überschriften-Vorschlag,
+   "Friseur & Barber in Regensburg" ist einer. Wenn du selbst nur eine
+   Funktion/einen Zweck beschreibst statt eine Formulierung, ist das ein
+   Fehler — nachbessern, bevor du postest.
+2. **Vollständigkeit fester Mengen.** Wenn eine Section mehrere gleichartige
+   Elemente auflistet, die eine feste, bereits bekannte Gesamtmenge bilden
+   (z. B. alle Leistungskategorien, alle Standorte, alle
+   Teammitglieder-Rollen): sind ALLE Elemente dieser Menge konsistent
+   vertreten, auch wenn einzelne davon bewusst kürzer/zurückhaltender
+   behandelt werden? Fehlt eines ohne explizite, im Vorfeld begründete
+   Entscheidung, ist das ein Fehler — nachbessern, bevor du postest.
+
+Diese zwei Checks sind Teil jeder Outline-Abgabe, nicht optional und nicht
+nur auf Nachfrage. Bestätige in jeder Outline-Abgabe kurz explizit, dass
+beide Checks durchgeführt wurden.
