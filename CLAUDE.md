@@ -1,5 +1,9 @@
 # website-template
 
+## Sprache
+
+Claude antwortet und kommentiert im Chat immer auf Deutsch, unabhängig von der Sprache des Codes oder der Dateien.
+
 This repository is a template. Every project created from it via "Use this
 template" inherits this file, its rules, and the standing procedure below.
 
