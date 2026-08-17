@@ -75,6 +75,10 @@ Operation nennen), muss aber immer VOR dem eigentlichen Start erfolgen — nie
 erst danach oder gar nicht. So läuft nie eine große, ressourcenintensive
 Operation unbemerkt im Hintergrund los.
 
+`claude-seo` soll außerdem am Ende jedes Projekts automatisch einmal
+vollständig durchlaufen — weiterhin mit der oben genannten
+Pflicht-Vorab-Ankündigung vor dem Start.
+
 ## Import-Regel: Google AI Studio Exporte
 
 Wenn eine ZIP-Datei aus Google AI Studio importiert wird (Vite/React-Scaffold,
@@ -123,21 +127,10 @@ Kompromisse dem Nutzer konkret vorlegen und auf eine Entscheidung warten
 — nicht einfach die einfachste/kleinste Variante eigenständig wählen
 und als erledigt melden.
 
-## Standard-Stack: Astro
+## Stack-Wahl: Astro oder Next.js
 
-Für neue Projekte aus diesem Template gilt **Astro** als Standard-Framework,
-sofern der Kunde/Nutzer nicht ausdrücklich etwas anderes fordert. Begründung:
-Astro passt am besten zu Marketing-/Unternehmens-Websites — schnell,
-größtenteils statisch, SEO-stark — und nutzt für aufwändige Animationen das
-Islands-Pattern als bereits bewährte Lazy-Loading-Lösung (siehe
-„Keine eigenmächtigen Qualitäts-Downgrades" oben: dynamischer Import nur auf
-der betroffenen Seite/Komponente, statt komplettem Entfernen).
-
-**Ausnahme:** Braucht der Kunde etwas wirklich App-artiges — Login-Bereich,
-komplexe Zustandslogik, Kundenportal — wird stattdessen **Next.js/React**
-gewählt. Diese Abweichung vom Standard-Stack muss dem Nutzer gegenüber
-ausdrücklich benannt werden (kurz erklären, welches App-artige Merkmal die
-Abweichung auslöst), nicht stillschweigend erfolgen.
+Kein festgelegter Standard-Stack. Claude entscheidet pro Projekt, ob Astro
+oder Next.js besser passt, und begründet kurz die Wahl.
 
 ## Pflicht-Selbstcheck vor jeder Überschriften-Outline
 
@@ -169,3 +162,13 @@ Bevor du eine H1-H4-Outline zur Freigabe vorlegst, prüfe JEDE einzelne
 Diese zwei Checks sind Teil jeder Outline-Abgabe, nicht optional und nicht
 nur auf Nachfrage. Bestätige in jeder Outline-Abgabe kurz explizit, dass
 beide Checks durchgeführt wurden.
+
+## Branches
+
+Vor dem Start neuer Arbeit immer zuerst main aktuell holen (`git pull origin main`).
+
+Nur bei Experimenten/Redesigns mit unsicherem Ausgang (nicht bei normalen Fixes oder klar umrissenen Features) vorher einen neuen Branch anlegen (`git checkout -b <name>`), damit main sauber bleibt, falls das Experiment verworfen wird. Bei sicheren, klar definierten Änderungen ist direktes Arbeiten auf main in Ordnung.
+
+## Installationen
+
+Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`curl | bash`, `/plugin marketplace add`, `uv tool install` o.ä.), ohne vorher zu fragen. Neue Skills nur als reine Datei unter `.claude/skills/<name>/SKILL.md` ablegen — keine Hooks, keine globalen Config-Änderungen ohne ausdrückliche Zustimmung.
