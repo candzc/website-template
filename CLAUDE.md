@@ -176,3 +176,23 @@ Nur bei Experimenten/Redesigns mit unsicherem Ausgang (nicht bei normalen Fixes 
 ## Installationen
 
 Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`curl | bash`, `/plugin marketplace add`, `uv tool install` o.ä.), ohne vorher zu fragen. Neue Skills nur als reine Datei unter `.claude/skills/<name>/SKILL.md` ablegen — keine Hooks, keine globalen Config-Änderungen ohne ausdrückliche Zustimmung.
+
+## Content- und Build-Regeln
+
+**Bilder:** Keine Menschen und keine sichtbaren Marken/Logos auf verwendeten Bildern (unabhängig von der Quelle). Stattdessen Texturen, Architektur, abstrakte Formen, Natur oder Stimmungsbilder passend zur Branche wählen.
+
+**SEO-Überschriften:** Genau eine H1 pro Seite. Direct-Answer-Prinzip: Der erste Satz direkt unter jeder H2 beantwortet die H2 unmittelbar und präzise. Keine Platzhalter-Überschriften wie "Unsere Vorteile" oder "Kundennutzen" — echte, aussagekräftige Formulierungen.
+
+**Textstil:** Durchgehend positiv formulieren, Negationen ("nicht", "kein", "ohne") vermeiden wo möglich. Kein KI-Sprech: Floskeln wie "in der heutigen digitalen Welt" oder künstliche Dreiergruppen wie "schnell, sicher und zuverlässig" sind zu vermeiden.
+
+**Cookie-Banner:** Muss Tracking technisch blockieren, bis die Einwilligung erteilt ist — nicht nur optisch vorhanden sein.
+
+**Alt-Texte:** 80–125 Zeichen, präzise und bildbezogen. Bei rein dekorativen Bildern leerer Alt-Text.
+
+**Performance:** Core-Web-Vitals-Zielwerte: LCP ≤ 2,5s, INP ≤ 200ms, CLS ≤ 0,1. Das erste Bild oberhalb des sichtbaren Bereichs (meist LCP-Element) nie lazy laden.
+
+**Motion:** Jede Animation braucht einen Fallback für prefers-reduced-motion.
+
+**Vor Livegang:** Kein Platzhaltertext (Lorem Ipsum), keine Test-Einträge oder Dummy-Daten dürfen live gehen.
+
+**Interne Verlinkung:** 3–5 Links im Fließtext pro Seite, verteilt über die Seite. Keine generischen Ankertexte wie "hier klicken" oder "mehr erfahren" — der Linktext beschreibt, was auf der Zielseite erwartet.
