@@ -196,3 +196,23 @@ Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`cur
 **Vor Livegang:** Kein Platzhaltertext (Lorem Ipsum), keine Test-Einträge oder Dummy-Daten dürfen live gehen.
 
 **Interne Verlinkung:** 3–5 Links im Fließtext pro Seite, verteilt über die Seite. Keine generischen Ankertexte wie "hier klicken" oder "mehr erfahren" — der Linktext beschreibt, was auf der Zielseite erwartet.
+
+**Title Tag:** 50–60 Zeichen (bzw. ca. 580px Breite), Hauptkeyword weit vorne, Marke am Ende, kein Duplikat zu anderen Seiten.
+
+**Meta Description:** Kernbotschaft in den ersten ~105 Zeichen, klarer Nutzen + konkrete Handlungsaufforderung (nicht "hier klicken" oder "entdecken", sondern z. B. "Jetzt Angebot anfordern").
+
+**URL-Struktur:** kurz, sprechend, Kleinschreibung, Bindestriche als Trenner, keine Umlaute/Sonderzeichen, keine Wortwiederholungen, keine Datumsangaben.
+
+**Semantisches HTML5:** konsequente Nutzung von `<main>`, `<article>`, `<section>`, `<nav>` statt gestylter `<div>`-Container; echte `<table>`, `<ul>`, `<ol>` statt CSS-Nachbauten.
+
+**Maschinenlesbarkeit:** Hauptinhalt muss auch ohne JavaScript im HTML sichtbar sein — kein kritischer Content, der erst nach Klick/Interaktion lädt.
+
+**Keine Dopplung:** kein Satz darf wortgleich oder nahezu wortgleich auf mehreren Seiten derselben Website stehen (v. a. Startseite vs. Unterseiten).
+
+**JSON-LD:** strukturierte Daten ausschließlich als JSON-LD, passendes Basis-Schema (Organization/LocalBusiness, WebSite, BreadcrumbList) einbinden. Kein FAQPage-Schema mehr anlegen (seit Mai 2026 ohne Rich-Result-Wirkung).
+
+**NAP-Konsistenz:** Name, Adresse, Telefonnummer überall auf der Website zeichengenau identisch.
+
+**Snippet-fähige Struktur:** Antwortabsätze (40–60 Wörter) direkt unter der passenden Überschrift für Featured Snippets/KI-Zitate.
+
+**H3-Regel:** H3 nur verwenden, wenn eine H2 mindestens zwei gleichrangige Unterpunkte hat — nie eine einzelne H3 unter einer H2.
