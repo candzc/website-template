@@ -193,9 +193,9 @@ Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`cur
 
 **Motion:** Jede Animation braucht einen Fallback für prefers-reduced-motion.
 
-**Vor Livegang:** Kein Platzhaltertext (Lorem Ipsum), keine Test-Einträge oder Dummy-Daten dürfen live gehen.
+**Vor Livegang:** Kein Platzhaltertext (Lorem Ipsum), keine Test-Einträge oder Dummy-Daten dürfen live gehen. Eigene 404-Seite mit Navigation, Favicon generiert, Open-Graph-/Twitter-Card-Bild gesetzt, kein Mixed Content.
 
-**Interne Verlinkung:** 3–5 Links im Fließtext pro Seite, verteilt über die Seite. Keine generischen Ankertexte wie "hier klicken" oder "mehr erfahren" — der Linktext beschreibt, was auf der Zielseite erwartet.
+**Interne Verlinkung:** 3–5 Links im Fließtext pro Seite, verteilt über die Seite. Keine generischen Ankertexte wie "hier klicken" oder "mehr erfahren" — der Linktext beschreibt, was auf der Zielseite erwartet. Keine Orphan Pages. Jede wichtige Seite maximal 3 Klicks von der Startseite entfernt. Pillar-Pages werden häufiger von Unterseiten verlinkt.
 
 **Title Tag:** 50–60 Zeichen (bzw. ca. 580px Breite), Hauptkeyword weit vorne, Marke am Ende, kein Duplikat zu anderen Seiten.
 
@@ -216,3 +216,39 @@ Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`cur
 **Snippet-fähige Struktur:** Antwortabsätze (40–60 Wörter) direkt unter der passenden Überschrift für Featured Snippets/KI-Zitate.
 
 **H3-Regel:** H3 nur verwenden, wenn eine H2 mindestens zwei gleichrangige Unterpunkte hat — nie eine einzelne H3 unter einer H2.
+
+**Mehrsprachigkeit (falls relevant):** hreflang mit Rückverlinkung auf alle Sprachversionen inkl. sich selbst, x-default definiert, Subdirectories (/de/, /en/) bevorzugt, jede Sprachversion eigener Canonical auf sich selbst, keine automatische IP-Weiterleitung (nur Banner/Hinweis), lokalisieren statt nur übersetzen.
+
+**KI-Crawler:** In robots.txt gezielt steuern, welche KI-Crawler (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot, Google-Extended) erlaubt oder blockiert werden — bewusste Entscheidung, kein Versehen.
+
+**Schema-Entitäten:** Eindeutige @id vergeben, sameAs zu relevanten Profilen (LinkedIn, Branchenverzeichnisse) setzen. AggregateRating nur mit echten, sichtbaren Bewertungen. Passender LocalBusiness-Subtyp statt generischem Typ verwenden. Service-Schema für Leistungsseiten, JobPosting für Stellenanzeigen.
+
+**Kein Cloaking:** Nie unterschiedliche Inhalte für Bots und Nutzer ausliefern.
+
+**PAA-Ergänzung:** Passende "People also ask"-Fragen als zusätzliche H2/H3 in bestehende Seiten einbauen, statt neue dünne Seiten dafür anzulegen.
+
+**Aktualität:** Veröffentlichungs-/Änderungsdatum sichtbar auf der Seite platzieren, wo relevant.
+
+**Formulare:** Vor Livegang sicherheitsgeprüft (Validierung, Spam-Schutz), nicht nur funktional getestet.
+
+**Domain-/DNS-Änderungen:** E-Mail-Records (MX, SPF, DKIM, DMARC) mitprüfen, nicht nur Website-Records — sonst droht E-Mail-Ausfall.
+
+**Barrierefreiheit:** Bei Bedarf (v. a. bei E-Commerce-Funktion) Zielstandard WCAG 2.1/2.2 AA. Ausreichender Kontrast, Tastaturnavigation, sichtbare Fokuszustände, ARIA-Labels wo nötig.
+
+**Lizenzen:** Bild- und Schriftlizenzen auf kommerzielle Nutzung geprüft und dokumentiert.
+
+**URL-Kanonisierung:** Einheitlicher Canonical-Redirect auf eine Variante (www oder non-www, immer HTTPS).
+
+**robots.txt:** kein globales Disallow: /, CSS/JS-Dateien nie blockieren, Sitemap-Pfad referenzieren.
+
+**Canonical Tag:** jede Seite bekommt einen selbstreferenzierenden Canonical-Tag.
+
+**Redirects:** bei URL-Änderungen immer saubere 301-Weiterleitung setzen, keine Redirect-Ketten/-Loops.
+
+**Sitemap:** nur indexierbare URLs (keine noindex-, 404- oder Redirect-URLs), vor Livegang generiert und eingereicht. noindex von Staging vor Produktivsetzung entfernen.
+
+**Bildformat/-technik:** WebP oder AVIF, width/height im HTML gesetzt (verhindert Layout-Sprünge), Lazy Loading nur unterhalb des sichtbaren Bereichs.
+
+**Mobile/Touch:** Touch-Elemente mind. 48×48px, Fließtext mind. 16px, korrekter Viewport-Meta-Tag, keine störenden Interstitials auf Mobilgeräten.
+
+**Video:** auf YouTube hosten und einbetten statt selbst zu hosten, Untertitel ergänzen.
