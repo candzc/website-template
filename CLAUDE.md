@@ -253,6 +253,8 @@ Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`cur
 
 **Video:** auf YouTube hosten und einbetten statt selbst zu hosten, Untertitel ergänzen.
 
+**Sprungmarken-Navigation:** Bei Unterseiten mit mehreren Unterthemen ein Übersichtsmenü direkt unter dem Hero einbauen. Klick scrollt sanft (smooth scroll) zur passenden Section auf derselben Seite, keine neue URL. Aktives Unterthema beim Scrollen optisch hervorheben (Scroll-Spy).
+
 ## Urheberrecht und Rechtsgrundlagen — Code-relevant
 
 Texte: Niemals Text, Code oder Bilder von Referenzseiten oder Wettbewerbern 1:1 übernehmen. Stil-Idee inspirieren lassen ist erlaubt, Kopieren nicht — auch nicht bei Platzhaltertexten oder Fallback-Texten (Button-Beschriftungen, Fehlermeldungen).
