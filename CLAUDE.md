@@ -252,3 +252,15 @@ Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`cur
 **Mobile/Touch:** Touch-Elemente mind. 48×48px, Fließtext mind. 16px, korrekter Viewport-Meta-Tag, keine störenden Interstitials auf Mobilgeräten.
 
 **Video:** auf YouTube hosten und einbetten statt selbst zu hosten, Untertitel ergänzen.
+
+## Urheberrecht und Rechtsgrundlagen — Code-relevant
+
+Texte: Niemals Text, Code oder Bilder von Referenzseiten oder Wettbewerbern 1:1 übernehmen. Stil-Idee inspirieren lassen ist erlaubt, Kopieren nicht — auch nicht bei Platzhaltertexten oder Fallback-Texten (Button-Beschriftungen, Fehlermeldungen).
+
+Bilder: Ausschließlich aus Unsplash, Pexels oder Nano Banana. Keine Bilder von Referenzseiten oder aus Google-Bildersuche übernehmen.
+
+Cookies und Tracking: Rechtsgrundlage ist § 25 TTDSG (Einwilligungspflicht für Cookies/lokale Speicherung) in Verbindung mit der DSGVO (Rechtsgrundlage der Datenverarbeitung selbst). Kein Tracking-Skript, kein Drittanbieter-Request (Google Fonts, Maps, YouTube-Embed, Analytics, Social-Widgets) darf laden, bevor eine aktive Einwilligung vorliegt — nicht nur optisch blockiert, sondern technisch unterbunden.
+
+Cookie-Banner: Mindestens die Kategorien Notwendig, Statistik und Marketing einzeln auswählbar (nicht nur Alles-an/Alles-aus), sofern mehr als eine Kategorie eingesetzt wird. Ablehnen genauso einfach erreichbar wie Zustimmen — ein Klick, kein Dark Pattern.
+
+Formulardaten: Nur die tatsächlich benötigten Felder abfragen (Datenminimierung), keine Daten an Drittanbieter ohne Nennung in der Datenschutzerklärung senden.
