@@ -266,3 +266,15 @@ Cookies und Tracking: Rechtsgrundlage ist § 25 TTDSG (Einwilligungspflicht für
 Cookie-Banner: Mindestens die Kategorien Notwendig, Statistik und Marketing einzeln auswählbar (nicht nur Alles-an/Alles-aus), sofern mehr als eine Kategorie eingesetzt wird. Ablehnen genauso einfach erreichbar wie Zustimmen — ein Klick, kein Dark Pattern.
 
 Formulardaten: Nur die tatsächlich benötigten Felder abfragen (Datenminimierung), keine Daten an Drittanbieter ohne Nennung in der Datenschutzerklärung senden.
+
+## Performance- und Darstellungsqualität — immer prüfen und beheben
+
+Nach jedem Build-Schritt aktiv auf folgende drei Probleme prüfen, nicht nur dokumentieren, sondern beheben:
+
+CLS (Cumulative Layout Shift): Text, Bilder oder Buttons springen nach unten, weil ein Element verspätet lädt. Ursache meist fehlende width/height bei Bildern oder nachträglich eingefügte Elemente ohne reservierten Platz. Ziel: CLS ≤ 0,1.
+
+Jank: Ruckeln beim Scrollen oder bei Animationen, Seite läuft nicht flüssig mit 60 Bildern pro Sekunde. Ursache meist zu teure Animationen (nicht GPU-beschleunigt) oder blockierender JavaScript-Code während des Scrollens.
+
+Glitch: Kurzer visueller Fehler oder Flackern auf dem Bildschirm. Ursache meist Render-Konflikte oder fehlerhafte CSS-Übergänge.
+
+Diese Prüfung ist Teil jedes Builds, nicht optional und nicht nur bei Beschwerde.
