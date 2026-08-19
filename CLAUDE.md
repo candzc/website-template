@@ -253,6 +253,22 @@ Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`cur
 
 **Video:** auf YouTube hosten und einbetten statt selbst zu hosten, Untertitel ergänzen.
 
+**Google Analytics (GA4):** Fällt unter Kategorie "Statistik" im Cookie-Banner, lädt technisch erst nach entsprechender Einwilligung — nicht nur optisch blockiert. Rechtstext dafür liefert eRecht24 (Datenschutzerklärung), die technische Ladesperre ist Aufgabe des Codes.
+
+## Sprungmarken-Navigation
+
+Bei Unterseiten mit mehreren sinnvollen Unterthemen — nur wenn es zum Design und Seiteninhalt passt, nicht erzwingen: Übersichtsmenü direkt unter dem Hero einbauen. Klick scrollt sanft (smooth scroll) zur passenden Section auf derselben Seite, keine neue URL. Aktives Unterthema beim Scrollen optisch hervorheben (Scroll-Spy).
+
+## Performance- und Darstellungsqualität — immer prüfen und beheben
+
+Nach jedem Build-Schritt aktiv auf folgende Probleme prüfen, nicht nur dokumentieren, sondern beheben:
+
+Jank: Ruckeln beim Scrollen oder bei Animationen, Seite läuft nicht flüssig. Ursache meist zu teure Animationen (nicht GPU-beschleunigt) oder blockierender JavaScript-Code während des Scrollens.
+
+Glitch: Kurzer visueller Fehler oder Flackern auf dem Bildschirm. Ursache meist Render-Konflikte oder fehlerhafte CSS-Übergänge.
+
+(CLS-Zielwert ≤0,1 steht bereits weiter oben unter Performance — gilt weiterhin.)
+
 ## Urheberrecht und Rechtsgrundlagen — Code-relevant
 
 Texte: Niemals Text, Code oder Bilder von Referenzseiten oder Wettbewerbern 1:1 übernehmen. Stil-Idee inspirieren lassen ist erlaubt, Kopieren nicht — auch nicht bei Platzhaltertexten oder Fallback-Texten (Button-Beschriftungen, Fehlermeldungen).
