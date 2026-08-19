@@ -294,3 +294,19 @@ Cookies und Tracking: Rechtsgrundlage ist § 25 TTDSG (Einwilligungspflicht für
 Cookie-Banner: Mindestens die Kategorien Notwendig, Statistik und Marketing einzeln auswählbar (nicht nur Alles-an/Alles-aus), sofern mehr als eine Kategorie eingesetzt wird. Ablehnen genauso einfach erreichbar wie Zustimmen — ein Klick, kein Dark Pattern.
 
 Formulardaten: Nur die tatsächlich benötigten Felder abfragen (Datenminimierung), keine Daten an Drittanbieter ohne Nennung in der Datenschutzerklärung senden.
+
+## Kundenseitig editierbare Inhalte
+
+Nur einrichten, wenn in PROJEKT.md Abschnitt E "Self-Service-Content-Paket gewünscht" mit ja beantwortet ist.
+
+Falls ja: Pages CMS einsetzen (kostenlos, Git-basiert, arbeitet direkt mit dem GitHub-Repo, kein zusätzlicher Server, kein zusätzlicher Account außer GitHub) für Team, Blog, Hinweisbanner.
+
+Umsetzung: Werte (Name, Foto, Text, An/Aus) werden nie fest in Komponenten/HTML geschrieben, sondern immer aus einer eigenen Datendatei gelesen (z. B. team.json, blog/*.md, banner.json). Der Code liest diese Dateien nur aus — dieselbe Trennung von Daten und Code wie bei PROJEKT.md/CONTENT.md.
+
+Eine Konfigurationsdatei (.pages.yml) legt fest, welche Felder in der CMS-Oberfläche sichtbar sind. Bodytext der Kernseiten (Startseite, Leistungen, Über uns, Kontakt) wird NIE als Feld freigegeben — bleibt gesperrt, nur über den normalen Build-Prozess änderbar.
+
+Änderungen des Kunden gehen automatisch live (Cloudflare baut nach jedem Speichern neu), keine Freigabe-Stufe nötig für Team/Blog/Banner.
+
+Größere Änderungen (neue Seiten, Struktur, Design, Kernseiten-Texte) laufen weiterhin nur über die Agentur, nicht über das CMS.
+
+Falls nein: kein Pages-CMS-Setup, keine Datendatei-Trennung nötig — normaler Build wie gewohnt.
