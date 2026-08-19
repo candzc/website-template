@@ -253,7 +253,11 @@ Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`cur
 
 **Video:** auf YouTube hosten und einbetten statt selbst zu hosten, Untertitel ergänzen.
 
-**Google Analytics (GA4):** Nur einbauen, wenn in PROJEKT.md Abschnitt E "Google Analytics gewünscht" mit ja beantwortet ist. Falls ja: fällt unter Kategorie "Statistik" im Cookie-Banner, lädt technisch erst nach entsprechender Einwilligung — nicht nur optisch blockiert. Rechtstext dafür liefert eRecht24 (Datenschutzerklärung), die technische Ladesperre ist Aufgabe des Codes.
+## Analytics
+
+Cloudflare Web Analytics: Standard bei jedem Projekt, immer aktivieren (im Cloudflare-Dashboard, kein Kundenzugriff nötig). Cookielos, keine Einwilligung/Cookie-Banner-Eintrag nötig.
+
+Google Analytics (GA4): Nur zusätzlich einbauen, wenn in PROJEKT.md Abschnitt E "Google Analytics (GA4) zusätzlich gewünscht" mit ja beantwortet ist (z. B. bei SEA-Kunden wegen Google-Ads-Verknüpfung). Falls ja: fällt unter Kategorie "Statistik" im Cookie-Banner, lädt technisch erst nach entsprechender Einwilligung — nicht nur optisch blockiert. Rechtstext dafür liefert eRecht24 (Datenschutzerklärung), die technische Ladesperre ist Aufgabe des Codes.
 
 ## Sprungmarken-Navigation
 
