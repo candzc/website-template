@@ -213,7 +213,17 @@ Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`cur
 
 **NAP-Konsistenz:** Name, Adresse, Telefonnummer überall auf der Website zeichengenau identisch.
 
-**Snippet-fähige Struktur:** Antwortabsätze (40–60 Wörter) direkt unter der passenden Überschrift für Featured Snippets/KI-Zitate.
+### Featured Snippets & KI-Zitierfähigkeit — erweitert
+
+Bei Seiten mit Snippet-Potenzial (Frage-Keyword, informationsorientiert):
+
+Antwortblock-Formel: H2 in der Formulierung der Suchanfrage (z. B. "Was kostet X?"). Direkt danach, ohne Einleitung ("In diesem Beitrag..."), ein eigenständiger Antwortblock: 40–60 Wörter, erster Satz ohne Bezugswort ("das", "dies"), mit konkreter Zahl + Einheit + Stand-Datum wo möglich, kein Marketing-Ton.
+
+Format je nach Erwartung: Liste erwartet → echte <ul>/<ol> mit 5–8 Punkten, gleich lang. Tabelle erwartet → echte <table>, 2–4 Spalten, 3–8 Zeilen, keine verschmolzenen Zellen. Definition erwartet → ein Satz "X ist ein/eine …, der/die …", Begriff am Satzanfang.
+
+Technisch: robots-meta ohne Einschränkung setzen (kein nosnippet, kein data-nosnippet, kein zu kurzes max-snippet — max-snippet:-1, max-image-preview:large, max-video-preview:-1). Antworttext ohne JavaScript im HTML sichtbar (siehe Maschinenlesbarkeit).
+
+PAA-Ergänzung: passende "People also ask"-Fragen als zusätzliche H2/H3 auf der bestehenden Seite ergänzen, mit demselben Antwortblock-Aufbau — keine neue dünne Seite pro Frage. Dieselbe Frage nie auf zwei Seiten derselben Domain beantworten.
 
 **H3-Regel:** H3 nur verwenden, wenn eine H2 mindestens zwei gleichrangige Unterpunkte hat — nie eine einzelne H3 unter einer H2.
 
