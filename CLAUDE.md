@@ -253,7 +253,7 @@ Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`cur
 
 **Video:** auf YouTube hosten und einbetten statt selbst zu hosten, Untertitel ergänzen.
 
-**Google Analytics (GA4):** Fällt unter Kategorie "Statistik" im Cookie-Banner, lädt technisch erst nach entsprechender Einwilligung — nicht nur optisch blockiert. Rechtstext dafür liefert eRecht24 (Datenschutzerklärung), die technische Ladesperre ist Aufgabe des Codes.
+**Google Analytics (GA4):** Nur einbauen, wenn in PROJEKT.md Abschnitt E "Google Analytics gewünscht" mit ja beantwortet ist. Falls ja: fällt unter Kategorie "Statistik" im Cookie-Banner, lädt technisch erst nach entsprechender Einwilligung — nicht nur optisch blockiert. Rechtstext dafür liefert eRecht24 (Datenschutzerklärung), die technische Ladesperre ist Aufgabe des Codes.
 
 ## Sprungmarken-Navigation
 
