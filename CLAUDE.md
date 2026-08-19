@@ -213,7 +213,17 @@ Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`cur
 
 **NAP-Konsistenz:** Name, Adresse, Telefonnummer überall auf der Website zeichengenau identisch.
 
-**Snippet-fähige Struktur:** Antwortabsätze (40–60 Wörter) direkt unter der passenden Überschrift für Featured Snippets/KI-Zitate.
+### Featured Snippets & KI-Zitierfähigkeit — erweitert
+
+Bei Seiten mit Snippet-Potenzial (Frage-Keyword, informationsorientiert):
+
+Antwortblock-Formel: H2 in der Formulierung der Suchanfrage (z. B. "Was kostet X?"). Direkt danach, ohne Einleitung ("In diesem Beitrag..."), ein eigenständiger Antwortblock: 40–60 Wörter, erster Satz ohne Bezugswort ("das", "dies"), mit konkreter Zahl + Einheit + Stand-Datum wo möglich, kein Marketing-Ton.
+
+Format je nach Erwartung: Liste erwartet → echte <ul>/<ol> mit 5–8 Punkten, gleich lang. Tabelle erwartet → echte <table>, 2–4 Spalten, 3–8 Zeilen, keine verschmolzenen Zellen. Definition erwartet → ein Satz "X ist ein/eine …, der/die …", Begriff am Satzanfang.
+
+Technisch: robots-meta ohne Einschränkung setzen (kein nosnippet, kein data-nosnippet, kein zu kurzes max-snippet — max-snippet:-1, max-image-preview:large, max-video-preview:-1). Antworttext ohne JavaScript im HTML sichtbar (siehe Maschinenlesbarkeit).
+
+PAA-Ergänzung: passende "People also ask"-Fragen als zusätzliche H2/H3 auf der bestehenden Seite ergänzen, mit demselben Antwortblock-Aufbau — keine neue dünne Seite pro Frage. Dieselbe Frage nie auf zwei Seiten derselben Domain beantworten.
 
 **H3-Regel:** H3 nur verwenden, wenn eine H2 mindestens zwei gleichrangige Unterpunkte hat — nie eine einzelne H3 unter einer H2.
 
@@ -253,7 +263,25 @@ Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`cur
 
 **Video:** auf YouTube hosten und einbetten statt selbst zu hosten, Untertitel ergänzen.
 
-**Sprungmarken-Navigation:** Bei Unterseiten mit mehreren Unterthemen ein Übersichtsmenü direkt unter dem Hero einbauen. Klick scrollt sanft (smooth scroll) zur passenden Section auf derselben Seite, keine neue URL. Aktives Unterthema beim Scrollen optisch hervorheben (Scroll-Spy).
+## Analytics
+
+Cloudflare Web Analytics: Standard bei jedem Projekt, immer aktivieren (im Cloudflare-Dashboard, kein Kundenzugriff nötig). Cookielos, keine Einwilligung/Cookie-Banner-Eintrag nötig.
+
+Google Analytics (GA4): Nur zusätzlich einbauen, wenn in PROJEKT.md Abschnitt E "Google Analytics (GA4) zusätzlich gewünscht" mit ja beantwortet ist (z. B. bei SEA-Kunden wegen Google-Ads-Verknüpfung). Falls ja: fällt unter Kategorie "Statistik" im Cookie-Banner, lädt technisch erst nach entsprechender Einwilligung — nicht nur optisch blockiert. Rechtstext dafür liefert eRecht24 (Datenschutzerklärung), die technische Ladesperre ist Aufgabe des Codes.
+
+## Sprungmarken-Navigation
+
+Bei Unterseiten mit mehreren sinnvollen Unterthemen — nur wenn es zum Design und Seiteninhalt passt, nicht erzwingen: Übersichtsmenü direkt unter dem Hero einbauen. Klick scrollt sanft (smooth scroll) zur passenden Section auf derselben Seite, keine neue URL. Aktives Unterthema beim Scrollen optisch hervorheben (Scroll-Spy).
+
+## Performance- und Darstellungsqualität — immer prüfen und beheben
+
+Nach jedem Build-Schritt aktiv auf folgende Probleme prüfen, nicht nur dokumentieren, sondern beheben:
+
+Jank: Ruckeln beim Scrollen oder bei Animationen, Seite läuft nicht flüssig. Ursache meist zu teure Animationen (nicht GPU-beschleunigt) oder blockierender JavaScript-Code während des Scrollens.
+
+Glitch: Kurzer visueller Fehler oder Flackern auf dem Bildschirm. Ursache meist Render-Konflikte oder fehlerhafte CSS-Übergänge.
+
+(CLS-Zielwert ≤0,1 steht bereits weiter oben unter Performance — gilt weiterhin.)
 
 ## Urheberrecht und Rechtsgrundlagen — Code-relevant
 
@@ -266,18 +294,6 @@ Cookies und Tracking: Rechtsgrundlage ist § 25 TTDSG (Einwilligungspflicht für
 Cookie-Banner: Mindestens die Kategorien Notwendig, Statistik und Marketing einzeln auswählbar (nicht nur Alles-an/Alles-aus), sofern mehr als eine Kategorie eingesetzt wird. Ablehnen genauso einfach erreichbar wie Zustimmen — ein Klick, kein Dark Pattern.
 
 Formulardaten: Nur die tatsächlich benötigten Felder abfragen (Datenminimierung), keine Daten an Drittanbieter ohne Nennung in der Datenschutzerklärung senden.
-
-## Performance- und Darstellungsqualität — immer prüfen und beheben
-
-Nach jedem Build-Schritt aktiv auf folgende drei Probleme prüfen, nicht nur dokumentieren, sondern beheben:
-
-CLS (Cumulative Layout Shift): Text, Bilder oder Buttons springen nach unten, weil ein Element verspätet lädt. Ursache meist fehlende width/height bei Bildern oder nachträglich eingefügte Elemente ohne reservierten Platz. Ziel: CLS ≤ 0,1.
-
-Jank: Ruckeln beim Scrollen oder bei Animationen, Seite läuft nicht flüssig mit 60 Bildern pro Sekunde. Ursache meist zu teure Animationen (nicht GPU-beschleunigt) oder blockierender JavaScript-Code während des Scrollens.
-
-Glitch: Kurzer visueller Fehler oder Flackern auf dem Bildschirm. Ursache meist Render-Konflikte oder fehlerhafte CSS-Übergänge.
-
-Diese Prüfung ist Teil jedes Builds, nicht optional und nicht nur bei Beschwerde.
 
 ## Kundenseitig editierbare Inhalte
 
