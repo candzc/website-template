@@ -273,6 +273,38 @@ Google Analytics (GA4): Nur zusätzlich einbauen, wenn in PROJEKT.md Abschnitt E
 
 Bei Unterseiten mit mehreren sinnvollen Unterthemen — nur wenn es zum Design und Seiteninhalt passt, nicht erzwingen: Übersichtsmenü direkt unter dem Hero einbauen. Klick scrollt sanft (smooth scroll) zur passenden Section auf derselben Seite, keine neue URL. Aktives Unterthema beim Scrollen optisch hervorheben (Scroll-Spy).
 
+## Seitenaufbau und Pflichtseiten
+
+### Navbar
+
+Maximal 5–7 Hauptpunkte in der Hauptnavigation. Rechtsseiten (Impressum, Datenschutzerklärung, Cookie-Einstellungen) gehören nicht in die Navbar, sondern ausschließlich in den Footer.
+
+### Breadcrumb
+
+Ab der zweiten Ebene (also ab Unterseiten, die selbst wieder Unterseiten haben, z. B. Leistungen > Leistungsdetail) ist eine Breadcrumb-Navigation Pflicht. Auf der Startseite und auf Seiten der ersten Ebene nicht nötig. Technisch als BreadcrumbList (JSON-LD) UND sichtbar im HTML umsetzen, nicht nur strukturierte Daten ohne sichtbare Breadcrumb.
+
+### Footer — Pflichtinhalt
+
+Navigation (Kurzlinks zu den Hauptseiten), Kontaktdaten, Social-Media-Links (falls vorhanden), alle Rechtslinks (Impressum, Datenschutzerklärung, Cookie-Einstellungen).
+
+### Pflichtseiten — dürfen nie fehlen
+
+Diese Seiten müssen in JEDEM Projekt angelegt und verlinkt werden, unabhängig davon, ob sie in PROJEKT.md Abschnitt G explizit aufgeführt sind:
+
+| Seite | Pflichtgrund | Platzierung |
+|---|---|---|
+| Impressum | § 5 DDG — leicht erkennbar, unmittelbar erreichbar, ständig verfügbar | Footer, jede Seite |
+| Datenschutzerklärung | Art. 13/14 DSGVO — nennt alle tatsächlich genutzten Dienste | Footer, jede Seite |
+| Cookie-Einstellungen | Widerruf muss so einfach sein wie die Erteilung — dauerhafter Link nötig, nicht nur das Banner | Footer, jede Seite |
+| 404-Seite | Kein Rechtsgrund, aber Pflicht in der QA | — |
+| Danke-Seite | Eigene URL für Conversion-Tracking in GA4 und Google Ads | nach Formularabsendung |
+
+Optional je nach Geschäftsmodell zusätzlich: AGB (bei Verkauf), Widerrufsbelehrung (bei Verbrauchern).
+
+Rechtsseiten nicht auf noindex setzen — ein vollständiges Impressum ist ein Vertrauenssignal.
+
+Inhalt von Impressum und Datenschutzerklärung kommt von eRecht24 (siehe Abschnitt "Urheberrecht und Rechtsgrundlagen") — dieser Abschnitt hier regelt nur, DASS die Seiten angelegt und korrekt verlinkt werden müssen, nicht deren Rechtstext.
+
 ## Performance- und Darstellungsqualität — immer prüfen und beheben
 
 Nach jedem Build-Schritt aktiv auf folgende Probleme prüfen, nicht nur dokumentieren, sondern beheben:
