@@ -305,6 +305,59 @@ Rechtsseiten nicht auf noindex setzen — ein vollständiges Impressum ist ein V
 
 Inhalt von Impressum und Datenschutzerklärung kommt von eRecht24 (siehe Abschnitt "Urheberrecht und Rechtsgrundlagen") — dieser Abschnitt hier regelt nur, DASS die Seiten angelegt und korrekt verlinkt werden müssen, nicht deren Rechtstext.
 
+## Standard-Seitenstrukturen
+
+Regel: In PROJEKT.md Abschnitt G steht bei jeder Seite ein Feld "Sections". Enthält dieses Feld das Wort "Standard" (z. B. "Standard" allein, oder "Standard, aber ohne Testimonials"), wird die unten passende Standard-Reihenfolge für diesen Seitentyp verwendet, mit den genannten Abweichungen umgesetzt. Enthält das Feld stattdessen eine vollständige eigene Sections-Liste (kein "Standard" darin), wird ausschließlich diese eigene Liste verwendet, kein Rückgriff auf den Standard.
+
+Eine Section ohne echten Inhalt wird gestrichen, nicht mit Füllmaterial bestückt. Die Reihenfolge ist eine Dramaturgie, keine beliebige Liste — nicht ohne Grund verschieben.
+
+### Startseite
+
+Hero (Keyword + Ort + Nutzen, primärer CTA direkt hier) → Vertrauen & Informationsvermittlung (Logos, Siegel, Zahlen) → Konkreter Kundennutzen (aus Kundensicht) → Leistungen Preview (Teaser) → CTA (früh) → Vorteile/USPs → Testimonials → Über uns Preview (kurz) → FAQ (Einwände, meist Preis/Dauer/Einzugsgebiet) → CTA (wiederholt den primären CTA aus dem Hero)
+
+### Leistungen (Übersicht)
+
+Header/Hero → Leistungsübersicht → Kundennutzen und Mehrwert → Einzelne Leistungen (verlinkt auf Detailseiten) → Preise (falls Preise genannt werden dürfen) → Prozess/Arbeitsweise → Vorteile/USPs → CTA
+
+### Leistung — Detailseite
+
+Header/Hero (eigenes Fokus-Keyword je Leistung) → Problem/Herausforderung → Lösung/Leistungsbeschreibung → Kundennutzen, Ergebnisse und Vorteile (zusammen) → Ablauf/Prozess → Beispiele/Ergebnisse → Passende Referenzen → FAQ → Anfrage-CTA
+
+### Über uns
+
+Header/Hero → Wer wir sind und für wen → Menschen/Team (echte Gesichter statt Stockfotos) → Unternehmensgeschichte → Mission und Vision → Werte → Unternehmenskultur → CTA
+
+### Referenzen (Übersicht)
+
+Header/Hero → Projektübersicht → Kategorien/Filter (erst ab ca. 8 Projekten) → Projektkarten → CTA
+
+### Referenz — Detailseite (optional, nur mit Freigabe Kundenname und messbarem Ergebnis)
+
+Projekt-Header → Kunde → Ausgangssituation → Herausforderung → Lösung → Umsetzung → Ergebnisse mit konkreter Zahl → Bilder/Galerie → Kundenstimme → Weitere Projekte → CTA
+
+### Kontakt
+
+Header/Hero (kurz) → Kontaktdaten (NAP zeichengenau wie im Google-Profil) → Kontaktformular/Anfrageformular → Ansprechpartner (Foto und Name) → Öffnungszeiten/Erreichbarkeit → Interaktive Karte/Anfahrt (lädt erst nach Einwilligung) → FAQ Preview → Social Media Links
+
+### FAQ (eigene Seite, nur wenn genug Fragen zusammenkommen — sonst als Section auf Startseite/Leistungsseiten)
+
+Header/Hero → Fragen nach Themen gruppiert → CTA
+Kein FAQPage-Schema anlegen — seit Mai 2026 ohne Wirkung in den Suchergebnissen.
+
+### Galerie/Portfolio (optional, für visuell überzeugende Branchen)
+
+Header/Hero → Kurze Einordnung (ein Absatz) → Kategorien/Filter (erst ab ca. 20 Bildern) → Bildraster (Lazy Loading, erstes Bild nie lazy) → Lightbox/Detailansicht (tastaturbedienbar) → CTA
+Jedes Bild braucht einen echten Alt-Text.
+
+### Karriere
+
+Header/Hero → Warum bei uns? → Unternehmenskultur → Benefits → Team-Einblicke → Offene Stellen (JobPosting-Schema je Stelle) → Bewerbungsprozess → Bewerbung-CTA
+
+### Blog
+
+Nur anlegen, wenn ein Redaktions-Retainer vereinbart ist — ohne laufende Redaktionsleistung entfällt die Seite komplett.
+Header/Hero → Kategorien → Featured Artikel → Artikel-Übersicht → Newsletter (Double-Opt-in nötig) → Footer
+
 ## Performance- und Darstellungsqualität — immer prüfen und beheben
 
 Nach jedem Build-Schritt aktiv auf folgende Probleme prüfen, nicht nur dokumentieren, sondern beheben:
