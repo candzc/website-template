@@ -1,96 +1,54 @@
 # website-template
 
+Diese Datei ist für Claude Code verbindlich. Jede Regel MUSS ausnahmslos
+eingehalten werden. Bei Unsicherheit, ob eine Regel greift oder wie sie
+umzusetzen ist, MUSS beim Nutzer nachgefragt werden — nie eigenständig
+annehmen oder entscheiden.
+
 ## Sprache
 
-Claude antwortet und kommentiert im Chat immer auf Deutsch, unabhängig von der Sprache des Codes oder der Dateien.
+Claude antwortet und kommentiert im Chat immer auf Deutsch, unabhängig von
+der Sprache des Codes oder der Dateien.
 
-This repository is a template. Every project created from it via "Use this
-template" inherits this file, its rules, and the standing procedure below.
+## Stack-Wahl
 
-## Standing procedure: reference-URL website builds
+Next.js ist der feste Standard-Stack für alle Projekte — ausnahmslos, auch
+bei 3D-Websites (z. B. mit Three.js/React Three Fiber). Keine
+Stack-Entscheidung pro Projekt nötig.
 
-Whenever a project built from this template names a **reference URL** during
-a website build (e.g. "build this like example.com", "use this site as
-reference"), run the following chain automatically. Do not ask the user to
-re-describe it — this is the default behavior for any reference URL from now
-on, in every project derived from this template.
+## Kein vorschneller Codestart
 
-1. **Fetch** — Use the `firecrawl-lean` skill to load the reference page
-   (scrape, not just WebFetch, since these are usually JS-heavy marketing
-   pages).
-2. **Extract design tokens** — Use the `taste-skill` skill on the same URL to
-   break the page down into concrete design tokens: colors, typography,
-   spacing, radii, shadows, grid.
-3. **Observe motion** — Use the Playwright MCP tools to open the same
-   reference URL in a real browser. Scroll through the full page and
-   interact with it (hover states, menus, load transitions) to observe
-   scroll-, hover-, and load-triggered animations: what triggers them, their
-   timing/easing, and their character.
-4. **Hand off**:
-   - Design tokens from step 2 go into Impeccable's `DESIGN.md` (via the
-     `impeccable` skill's `document`/setup flow).
-   - The observed movement patterns from step 3 become the motion brief for
-     step 5 — timing, triggers, and character, not implementation code.
-5. **Build motion** — Implement similar, not identical, movement effects,
-   held to the Emil Kowalski animation philosophy used by this repo's
-   `improve-animations` / `review-animations` skills: restraint by default,
-   effects matched to the original's timing and character rather than
-   copied wholesale or over-animated.
-6. **Verify** — Use Playwright again at the end to check responsive behavior
-   across breakpoints and walk the site's main click paths.
+Bei einem neuen Projekt (Website von Null) NIE mit der Umsetzung/Codierung
+beginnen, solange Details zu Aufbau, Design oder Inhalt noch offen sind oder
+nicht ausdrücklich mit dem Nutzer abgestimmt wurden. Erst wenn alle
+relevanten Punkte besprochen und vom Nutzer bestätigt sind, beginnt die
+Umsetzung.
 
-This chain applies per reference URL given, not just once per project. If a
-project names a new reference mid-build, re-run the chain for that URL.
+## SEO-Plugin: claude-seo (AgriciDaniel)
 
-## SEO plugin: claude-seo (AgriciDaniel)
+Dieses Repo installiert `claude-seo@agricidaniel-claude-seo` als
+Claude-Code-Plugin (Marketplace-Quelle und Enabled-Flag stehen in
+`.claude/settings.json`, jede frische Session/jeder Klon installiert es
+automatisch mit).
 
-This repo installs `claude-seo@agricidaniel-claude-seo` as a proper Claude Code
-plugin (not loose vendored skill files). Both the marketplace source and the
-enabled-plugin flag are declared in `.claude/settings.json`, so any fresh
-session/clone of this repo auto-fetches and installs it the same way.
+Die `claude-seo`-Skills (`seo`, `seo-audit`, `seo-technical`, …) dürfen
+automatisch ausgelöst werden, wenn eine Anweisung im Prompt oder in dieser
+Datei dazu passt — nicht nur manuell per `/seo <command> …`.
 
-**Entscheidung vom 2026-07-30 (bewusst vom Nutzer getroffen):** Die
-`claude-seo`-Skills (`seo`, `seo-audit`, `seo-technical`, …) dürfen ab jetzt
-**automatisch** von Claude Code ausgelöst werden, wenn eine Anweisung im
-Prompt oder in dieser CLAUDE.md dazu passt — nicht mehr nur manuell per
-`/seo <command> …`. Die vorherige Pflicht, `disable-model-invocation: true`
-nach jedem `claude plugin install`/`claude plugin update` manuell in alle
-`SKILL.md`-Dateien nachzutragen, **entfällt bewusst** für dieses Plugin.
-
-**Begründung/Abwägung:** Komfort (automatisches Auslösen ohne manuellen
-`/seo`-Befehl, z. B. aus einer Standing-Procedure heraus) wurde gegenüber dem
-Risiko unkontrolliert startender, ressourcenintensiver Läufe (Crawls über bis
-zu 500 Seiten, bis zu 15 parallele Subagents bei `seo-audit`) bewusst
-priorisiert. Das Risiko wird nicht ignoriert, sondern durch die
-Ankündigungspflicht im nächsten Abschnitt kompensiert.
-
-**Sicherheitsregel — Ankündigungspflicht vor automatischem Start:** Bevor ein
-automatisch ausgelöster (nicht explizit per `/seo …` angeforderter)
-`claude-seo`-Skill tatsächlich zu laufen beginnt — insbesondere jeder Skill,
-der einen mehrseitigen Crawl und/oder mehrere parallele Subagents startet,
+**Ankündigungspflicht:** Bevor ein automatisch ausgelöster (nicht per
+`/seo …` angeforderter) `claude-seo`-Skill zu laufen beginnt — insbesondere
+jeder Skill mit mehrseitigem Crawl und/oder mehreren parallelen Subagents,
 wie `seo-audit` — MUSS Claude Code das dem Nutzer vorher kurz ankündigen,
 z. B.:
 
 > „Starte jetzt automatisch einen vollständigen SEO-Audit mit bis zu 15
 > Agents über bis zu 500 Seiten."
 
-Diese Ankündigung ist knapp zu halten (ein Satz, Umfang/Größenordnung der
-Operation nennen), muss aber immer VOR dem eigentlichen Start erfolgen — nie
-erst danach oder gar nicht. So läuft nie eine große, ressourcenintensive
-Operation unbemerkt im Hintergrund los.
+Knapp halten (ein Satz, Umfang nennen), aber IMMER vor dem Start, nie danach
+oder gar nicht.
 
-`claude-seo` soll außerdem am Ende jedes Projekts automatisch einmal
-vollständig durchlaufen — weiterhin mit der oben genannten
-Pflicht-Vorab-Ankündigung vor dem Start.
-
-## Import-Regel: Google AI Studio Exporte
-
-Wenn eine ZIP-Datei aus Google AI Studio importiert wird (Vite/React-Scaffold,
-erkennbar an `metadata.json`): Font-Stack und Design-Tokens IMMER gegen das
-Projekt-Standard (next/font/google-Setup, bestehende Farbwerte) abgleichen,
-nicht ungeprüft übernehmen. Enthaltene Komponenten (Three.js, Framer Motion
-o.ä.) dürfen übernommen werden, aber nur nach Anpassung an den bestehenden
-Font/Design-Standard.
+`claude-seo` läuft außerdem am Ende jedes Projekts automatisch einmal
+vollständig durch — weiterhin mit Pflicht-Vorab-Ankündigung.
 
 ## Google Fonts / DSGVO-Sicherheitsnetz
 
@@ -98,300 +56,338 @@ Google Fonts NIEMALS live von Google-Servern laden (DSGVO-Risiko durch
 IP-Übertragung). Immer `next/font/google` verwenden, damit Fonts beim Build
 selbst gehostet werden und keine Laufzeit-Anfragen an Google entstehen.
 
-## Platzhalterbilder: Pexels-API
-
-Solange keine echte Foto- oder KI-Bildgenerierung für ein Projekt verfügbar
-ist, dürfen Platzhalterbilder über die kostenlose Pexels-API eingebunden
-werden (Key liegt als `PEXELS_API_KEY` vor).
-
-Jedes so eingebundene Bild muss sichtbar als Platzhalter markiert sein:
-- ein Kommentar direkt an der Einbindungsstelle im Code, der auf Pexels als
-  Quelle und den Platzhalter-Charakter hinweist, und
-- ein Dateiname-Präfix `placeholder-` für lokal gespeicherte/heruntergeladene
-  Bilddateien.
-
-Sobald echtes Bildmaterial (Fotos oder KI-Generierung) verfügbar ist, müssen
-die Pexels-Platzhalter ersetzt werden — sie sind nicht für den produktiven
-Einsatz gedacht.
-
 ## Keine eigenmächtigen Qualitäts-Downgrades
 
 Build-Warnungen (Bundle-Größe, Chunk-Size, Performance-Hinweise) dürfen
-NIEMALS dazu führen, dass eine Animation, ein 3D-Effekt oder ein
-visuelles Feature entfernt, vereinfacht oder durch eine geringerwertige
-Alternative ersetzt wird — ohne das vorher explizit mit dem Nutzer
-abzustimmen.
+NIEMALS dazu führen, dass eine Animation, ein 3D-Effekt oder ein visuelles
+Feature entfernt, vereinfacht oder durch eine geringerwertige Alternative
+ersetzt wird — ohne das vorher explizit mit dem Nutzer abzustimmen.
 
-Stattdessen gilt: Erst Lösungen suchen, die die Qualität erhalten
-(z. B. Lazy-Loading, Code-Splitting, dynamischer Import nur auf der
-betroffenen Seite/Komponente, statt komplettem Entfernen).
+Stattdessen gilt: Erst Lösungen suchen, die die Qualität erhalten (z. B.
+Lazy-Loading, Code-Splitting, dynamischer Import nur auf der betroffenen
+Seite/Komponente, statt komplettem Entfernen).
 
 Falls wirklich keine Lösung ohne Qualitätsverlust möglich ist: Die
-Kompromisse dem Nutzer konkret vorlegen und auf eine Entscheidung warten
-— nicht einfach die einfachste/kleinste Variante eigenständig wählen
-und als erledigt melden.
-
-## Stack-Wahl: Astro oder Next.js
-
-Kein festgelegter Standard-Stack. Claude entscheidet pro Projekt, ob Astro
-oder Next.js besser passt, und begründet kurz die Wahl.
+Kompromisse dem Nutzer konkret vorlegen und auf eine Entscheidung warten —
+nicht einfach die einfachste/kleinste Variante eigenständig wählen und als
+erledigt melden.
 
 ## Pflicht-Selbstcheck vor jeder Überschriften-Outline
 
-Grund: Beide Fehler unten sind in echten Projekten bereits passiert, obwohl
-die zugrundeliegenden Regeln schon im `seo-website-rework`-Skill standen —
-das Problem war nicht die fehlende Regel, sondern dass sie nicht zuverlässig
-angewendet wurde, bevor eine Outline rausging. Deshalb gilt dieser Check ab
-sofort für JEDES Projekt aus diesem Template, automatisch, nicht nur auf
-Nachfrage.
-
-Bevor du eine H1-H4-Outline zur Freigabe vorlegst, prüfe JEDE einzelne
-Überschrift gegen:
+Bevor eine H1–H4-Outline zur Freigabe vorgelegt wird, MUSS jede einzelne
+Überschrift gegen folgende zwei Punkte geprüft werden:
 
 1. **Echter Wortlaut statt Slot-Name.** Ist es der tatsächlich geplante
    Wortlaut der Überschrift — NICHT eine Funktionsbeschreibung, ein
    Architektur-Slot-Name oder ein Platzhalter-Label? "Kurzvorstellung +
-   Kontakt-Kurzhinweis" ist KEIN gültiger Überschriften-Vorschlag,
-   "Friseur & Barber in Regensburg" ist einer. Wenn du selbst nur eine
-   Funktion/einen Zweck beschreibst statt eine Formulierung, ist das ein
-   Fehler — nachbessern, bevor du postest.
+   Kontakt-Kurzhinweis" ist KEIN gültiger Vorschlag, "Friseur & Barber in
+   Regensburg" ist einer.
 2. **Vollständigkeit fester Mengen.** Wenn eine Section mehrere gleichartige
    Elemente auflistet, die eine feste, bereits bekannte Gesamtmenge bilden
    (z. B. alle Leistungskategorien, alle Standorte, alle
-   Teammitglieder-Rollen): sind ALLE Elemente dieser Menge konsistent
-   vertreten, auch wenn einzelne davon bewusst kürzer/zurückhaltender
-   behandelt werden? Fehlt eines ohne explizite, im Vorfeld begründete
-   Entscheidung, ist das ein Fehler — nachbessern, bevor du postest.
+   Teammitglieder-Rollen): sind ALLE Elemente konsistent vertreten? Fehlt
+   eines ohne explizite, vorab begründete Entscheidung, ist das ein Fehler —
+   nachbessern, bevor die Outline abgegeben wird.
 
-Diese zwei Checks sind Teil jeder Outline-Abgabe, nicht optional und nicht
-nur auf Nachfrage. Bestätige in jeder Outline-Abgabe kurz explizit, dass
-beide Checks durchgeführt wurden.
+Beide Checks MÜSSEN in jeder Outline-Abgabe kurz explizit bestätigt werden.
 
 ## Branches
 
-Vor dem Start neuer Arbeit immer zuerst main aktuell holen (`git pull origin main`).
+Vor dem Start neuer Arbeit immer zuerst main aktuell holen
+(`git pull origin main`).
 
-Nur bei Experimenten/Redesigns mit unsicherem Ausgang (nicht bei normalen Fixes oder klar umrissenen Features) vorher einen neuen Branch anlegen (`git checkout -b <name>`), damit main sauber bleibt, falls das Experiment verworfen wird. Bei sicheren, klar definierten Änderungen ist direktes Arbeiten auf main in Ordnung.
+Nur bei Experimenten/Redesigns mit unsicherem Ausgang (nicht bei normalen
+Fixes oder klar umrissenen Features) vorher einen neuen Branch anlegen
+(`git checkout -b <name>`), damit main sauber bleibt, falls das Experiment
+verworfen wird. Bei sicheren, klar definierten Änderungen ist direktes
+Arbeiten auf main in Ordnung.
 
-## Installationen
+## Content- und Build-Regeln (Struktur & Technik)
 
-Niemals automatisch Plugins installieren oder Installer-Skripte ausführen (`curl | bash`, `/plugin marketplace add`, `uv tool install` o.ä.), ohne vorher zu fragen. Neue Skills nur als reine Datei unter `.claude/skills/<name>/SKILL.md` ablegen — keine Hooks, keine globalen Config-Änderungen ohne ausdrückliche Zustimmung.
+Wenn Claude selbst Texte/Überschriften für ein Projekt verfasst (nicht
+nötig, wenn der Kunde bereits fertige Texte liefert), gelten zusätzlich die
+Schreibregeln im Skill `content-regeln`
+(`.claude/skills/content-regeln/SKILL.md`) — dieser wird manuell aktiviert.
+Diese Datei hier regelt ausschließlich Struktur und Technik.
 
-## Content- und Build-Regeln
+### SEO-Überschriften
 
-**Bilder:** Keine Menschen und keine sichtbaren Marken/Logos auf verwendeten Bildern (unabhängig von der Quelle). Stattdessen Texturen, Architektur, abstrakte Formen, Natur oder Stimmungsbilder passend zur Branche wählen.
+Genau eine H1 pro Seite — keine Ausnahme, keine zweite H1.
 
-**SEO-Überschriften:** Genau eine H1 pro Seite. Direct-Answer-Prinzip: Der erste Satz direkt unter jeder H2 beantwortet die H2 unmittelbar und präzise. Keine Platzhalter-Überschriften wie "Unsere Vorteile" oder "Kundennutzen" — echte, aussagekräftige Formulierungen.
+### Cookie-Banner
 
-**Textstil:** Durchgehend positiv formulieren, Negationen ("nicht", "kein", "ohne") vermeiden wo möglich. Kein KI-Sprech: Floskeln wie "in der heutigen digitalen Welt" oder künstliche Dreiergruppen wie "schnell, sicher und zuverlässig" sind zu vermeiden.
+Muss Tracking technisch blockieren, bis die Einwilligung erteilt ist — nicht
+nur optisch vorhanden sein.
 
-**Cookie-Banner:** Muss Tracking technisch blockieren, bis die Einwilligung erteilt ist — nicht nur optisch vorhanden sein.
+Kategorien Notwendig, Statistik und Marketing werden grundsätzlich alle als
+eigene, einzeln auswählbare Kategorie angelegt — auch wenn eine Kategorie im
+aktuellen Projekt (noch) leer ist. Ablehnen genauso einfach erreichbar wie
+Zustimmen — ein Klick, kein Dark Pattern.
 
-**Alt-Texte:** 80–125 Zeichen, präzise und bildbezogen. Bei rein dekorativen Bildern leerer Alt-Text.
+### Performance
 
-**Performance:** Core-Web-Vitals-Zielwerte: LCP ≤ 2,5s, INP ≤ 200ms, CLS ≤ 0,1. Das erste Bild oberhalb des sichtbaren Bereichs (meist LCP-Element) nie lazy laden.
+Core-Web-Vitals-Zielwerte: LCP ≤ 2,5s, INP ≤ 200ms, CLS ≤ 0,1. Das erste
+Bild oberhalb des sichtbaren Bereichs (meist LCP-Element) nie lazy laden.
 
-**Motion:** Jede Animation braucht einen Fallback für prefers-reduced-motion.
+### Motion
 
-**Vor Livegang:** Kein Platzhaltertext (Lorem Ipsum), keine Test-Einträge oder Dummy-Daten dürfen live gehen. Eigene 404-Seite mit Navigation, Favicon generiert, Open-Graph-/Twitter-Card-Bild gesetzt, kein Mixed Content.
+Jede Animation braucht einen Fallback für prefers-reduced-motion.
 
-**Interne Verlinkung:** 3–5 Links im Fließtext pro Seite, verteilt über die Seite. Keine generischen Ankertexte wie "hier klicken" oder "mehr erfahren" — der Linktext beschreibt, was auf der Zielseite erwartet. Keine Orphan Pages. Jede wichtige Seite maximal 3 Klicks von der Startseite entfernt. Pillar-Pages werden häufiger von Unterseiten verlinkt.
+### Vor Livegang
 
-**Title Tag:** 50–60 Zeichen (bzw. ca. 580px Breite), Hauptkeyword weit vorne, Marke am Ende, kein Duplikat zu anderen Seiten.
+Kein Platzhaltertext (Lorem Ipsum), keine Test-Einträge oder Dummy-Daten
+dürfen live gehen. Eigene 404-Seite mit Navigation, Favicon generiert,
+Open-Graph-/Twitter-Card-Bild gesetzt, kein Mixed Content.
 
-**Meta Description:** Kernbotschaft in den ersten ~105 Zeichen, klarer Nutzen + konkrete Handlungsaufforderung (nicht "hier klicken" oder "entdecken", sondern z. B. "Jetzt Angebot anfordern").
+### Formulare
 
-**URL-Struktur:** kurz, sprechend, Kleinschreibung, Bindestriche als Trenner, keine Umlaute/Sonderzeichen, keine Wortwiederholungen, keine Datumsangaben.
+Formulare zeigen dem Nutzer nach dem Absenden immer ein klares Feedback: bei
+Erfolg eine Bestätigung (Weiterleitung zur Danke-Seite), bei Fehler (z. B.
+Pflichtfeld fehlt, ungültiges Format) eine konkrete, verständliche
+Fehlermeldung direkt am betroffenen Feld — nie ein stilles Fehlschlagen ohne
+Rückmeldung.
 
-**Semantisches HTML5:** konsequente Nutzung von `<main>`, `<article>`, `<section>`, `<nav>` statt gestylter `<div>`-Container; echte `<table>`, `<ul>`, `<ol>` statt CSS-Nachbauten.
+Vor Livegang sicherheitsgeprüft (Validierung, Spam-Schutz), nicht nur
+funktional getestet.
 
-**Maschinenlesbarkeit:** Hauptinhalt muss auch ohne JavaScript im HTML sichtbar sein — kein kritischer Content, der erst nach Klick/Interaktion lädt.
+### Interne Verlinkung
 
-**Keine Dopplung:** kein Satz darf wortgleich oder nahezu wortgleich auf mehreren Seiten derselben Website stehen (v. a. Startseite vs. Unterseiten).
+7 Links im Fließtext pro Seite, verteilt über die Seite. Zusätzlich zur
+normalen Navigation erhält jede Unterseite eine Rückverlinkung zur
+Startseite im Fließtext. Keine Orphan Pages. Jede wichtige Seite maximal 3
+Klicks von der Startseite entfernt. Pillar-Pages werden häufiger von
+Unterseiten verlinkt.
 
-**JSON-LD:** strukturierte Daten ausschließlich als JSON-LD, passendes Basis-Schema (Organization/LocalBusiness, WebSite, BreadcrumbList) einbinden. Kein FAQPage-Schema mehr anlegen (seit Mai 2026 ohne Rich-Result-Wirkung).
+### Title Tag
 
-**NAP-Konsistenz:** Name, Adresse, Telefonnummer überall auf der Website zeichengenau identisch.
+50–60 Zeichen (bzw. ca. 580px Breite), Hauptkeyword weit vorne, Marke am
+Ende, kein Duplikat zu anderen Seiten.
 
-### Featured Snippets & KI-Zitierfähigkeit — erweitert
+### Meta Description
 
-Bei Seiten mit Snippet-Potenzial (Frage-Keyword, informationsorientiert):
+Kernbotschaft in den ersten ca. 105 Zeichen, Hauptkeyword der Seite
+enthalten.
 
-Antwortblock-Formel: H2 in der Formulierung der Suchanfrage (z. B. "Was kostet X?"). Direkt danach, ohne Einleitung ("In diesem Beitrag..."), ein eigenständiger Antwortblock: 40–60 Wörter, erster Satz ohne Bezugswort ("das", "dies"), mit konkreter Zahl + Einheit + Stand-Datum wo möglich, kein Marketing-Ton.
+### URL-Struktur
 
-Format je nach Erwartung: Liste erwartet → echte <ul>/<ol> mit 5–8 Punkten, gleich lang. Tabelle erwartet → echte <table>, 2–4 Spalten, 3–8 Zeilen, keine verschmolzenen Zellen. Definition erwartet → ein Satz "X ist ein/eine …, der/die …", Begriff am Satzanfang.
+Kurz, sprechend, Kleinschreibung, Bindestriche als Trenner, keine
+Umlaute/Sonderzeichen, keine Wortwiederholungen, keine Datumsangaben.
 
-Technisch: robots-meta ohne Einschränkung setzen (kein nosnippet, kein data-nosnippet, kein zu kurzes max-snippet — max-snippet:-1, max-image-preview:large, max-video-preview:-1). Antworttext ohne JavaScript im HTML sichtbar (siehe Maschinenlesbarkeit).
+### Semantisches HTML5
 
-PAA-Ergänzung: passende "People also ask"-Fragen als zusätzliche H2/H3 auf der bestehenden Seite ergänzen, mit demselben Antwortblock-Aufbau — keine neue dünne Seite pro Frage. Dieselbe Frage nie auf zwei Seiten derselben Domain beantworten.
+Konsequente Nutzung von `<main>`, `<article>`, `<section>`, `<nav>` statt
+gestylter `<div>`-Container; echte `<table>`, `<ul>`, `<ol>` statt
+CSS-Nachbauten.
 
-**H3-Regel:** H3 nur verwenden, wenn eine H2 mindestens zwei gleichrangige Unterpunkte hat — nie eine einzelne H3 unter einer H2.
+### Maschinenlesbarkeit
 
-**Mehrsprachigkeit (falls relevant):** hreflang mit Rückverlinkung auf alle Sprachversionen inkl. sich selbst, x-default definiert, Subdirectories (/de/, /en/) bevorzugt, jede Sprachversion eigener Canonical auf sich selbst, keine automatische IP-Weiterleitung (nur Banner/Hinweis), lokalisieren statt nur übersetzen.
+Hauptinhalt muss auch ohne JavaScript im HTML sichtbar sein — kein
+kritischer Content, der erst nach Klick/Interaktion lädt.
 
-**KI-Crawler:** In robots.txt gezielt steuern, welche KI-Crawler (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot, Google-Extended) erlaubt oder blockiert werden — bewusste Entscheidung, kein Versehen.
+### JSON-LD
 
-**Schema-Entitäten:** Eindeutige @id vergeben, sameAs zu relevanten Profilen (LinkedIn, Branchenverzeichnisse) setzen. AggregateRating nur mit echten, sichtbaren Bewertungen. Passender LocalBusiness-Subtyp statt generischem Typ verwenden. Service-Schema für Leistungsseiten, JobPosting für Stellenanzeigen.
+Strukturierte Daten ausschließlich als JSON-LD, passendes Basis-Schema
+(Organization/LocalBusiness, WebSite, BreadcrumbList) einbinden.
 
-**Kein Cloaking:** Nie unterschiedliche Inhalte für Bots und Nutzer ausliefern.
+### NAP-Konsistenz
 
-**PAA-Ergänzung:** Passende "People also ask"-Fragen als zusätzliche H2/H3 in bestehende Seiten einbauen, statt neue dünne Seiten dafür anzulegen.
+Name, Adresse, Telefonnummer überall auf der Website zeichengenau
+identisch.
 
-**Aktualität:** Veröffentlichungs-/Änderungsdatum sichtbar auf der Seite platzieren, wo relevant.
+### Featured Snippets — technisch
 
-**Formulare:** Vor Livegang sicherheitsgeprüft (Validierung, Spam-Schutz), nicht nur funktional getestet.
+robots-meta ohne Einschränkung setzen (kein nosnippet, kein
+data-nosnippet, kein zu kurzes max-snippet — max-snippet:-1,
+max-image-preview:large, max-video-preview:-1). Antworttext ohne
+JavaScript im HTML sichtbar (siehe Maschinenlesbarkeit).
 
-**Domain-/DNS-Änderungen:** E-Mail-Records (MX, SPF, DKIM, DMARC) mitprüfen, nicht nur Website-Records — sonst droht E-Mail-Ausfall.
+### H3-Regel
 
-**Barrierefreiheit:** Bei Bedarf (v. a. bei E-Commerce-Funktion) Zielstandard WCAG 2.1/2.2 AA. Ausreichender Kontrast, Tastaturnavigation, sichtbare Fokuszustände, ARIA-Labels wo nötig.
+H3 nur verwenden, wenn eine H2 mindestens zwei gleichrangige Unterpunkte
+hat — nie eine einzelne H3 unter einer H2.
 
-**Lizenzen:** Bild- und Schriftlizenzen auf kommerzielle Nutzung geprüft und dokumentiert.
+### KI-Crawler und Suchmaschinen-Crawler
 
-**URL-Kanonisierung:** Einheitlicher Canonical-Redirect auf eine Variante (www oder non-www, immer HTTPS).
+robots.txt erlaubt ausnahmslos allen Crawlern (GPTBot, ClaudeBot,
+PerplexityBot, OAI-SearchBot, Google-Extended etc.) den Zugriff — keine
+Blockierung, maximale Sichtbarkeit ist das Ziel. Kein globales
+Disallow: /, CSS/JS-Dateien nie blockieren, Sitemap-Pfad referenzieren.
 
-**robots.txt:** kein globales Disallow: /, CSS/JS-Dateien nie blockieren, Sitemap-Pfad referenzieren.
+### Schema-Entitäten
 
-**Canonical Tag:** jede Seite bekommt einen selbstreferenzierenden Canonical-Tag.
+Eindeutige @id vergeben, sameAs zu relevanten Profilen (LinkedIn,
+Branchenverzeichnisse) setzen. AggregateRating nur mit echten, sichtbaren
+Bewertungen. Passender LocalBusiness-Subtyp statt generischem Typ
+verwenden. Service-Schema für Leistungsseiten, JobPosting für
+Stellenanzeigen.
 
-**Redirects:** bei URL-Änderungen immer saubere 301-Weiterleitung setzen, keine Redirect-Ketten/-Loops.
+### Kein Cloaking
 
-**Sitemap:** nur indexierbare URLs (keine noindex-, 404- oder Redirect-URLs), vor Livegang generiert und eingereicht. noindex von Staging vor Produktivsetzung entfernen.
+Nie unterschiedliche Inhalte für Bots und Nutzer ausliefern.
 
-**Bildformat/-technik:** WebP oder AVIF, width/height im HTML gesetzt (verhindert Layout-Sprünge), Lazy Loading nur unterhalb des sichtbaren Bereichs.
+### Barrierefreiheit
 
-**Mobile/Touch:** Touch-Elemente mind. 48×48px, Fließtext mind. 16px, korrekter Viewport-Meta-Tag, keine störenden Interstitials auf Mobilgeräten.
+Bei Bedarf (v. a. bei E-Commerce-Funktion) Zielstandard WCAG 2.1/2.2 AA.
+Ausreichender Kontrast, Tastaturnavigation, sichtbare Fokuszustände,
+ARIA-Labels wo nötig.
 
-**Video:** auf YouTube hosten und einbetten statt selbst zu hosten, Untertitel ergänzen.
+### Lizenzen
+
+Bilder ausschließlich aus bekannten, kommerziell freien Quellen (Unsplash,
+Pexels, Nano Banana) verwenden — deren Standardlizenz deckt kommerzielle
+Nutzung ab. Bilder aus unbekannter Quelle, von Referenzseiten oder aus der
+Google-Bildersuche NIE übernehmen, auch nicht übergangsweise — bei
+Unsicherheit beim Nutzer nachfragen. Google Fonts sind bereits über
+Self-Hosting abgedeckt (siehe Google Fonts / DSGVO-Sicherheitsnetz).
+
+### URL-Kanonisierung
+
+Einheitlicher Canonical-Redirect auf eine Variante (www oder non-www,
+immer HTTPS).
+
+### Canonical Tag
+
+Jede Seite bekommt einen selbstreferenzierenden Canonical-Tag.
+
+### Redirects
+
+Bei URL-Änderungen immer saubere 301-Weiterleitung setzen, keine
+Redirect-Ketten/-Loops.
+
+### Sitemap
+
+Nur indexierbare URLs (keine noindex-, 404- oder Redirect-URLs). Wird bei
+jedem Projekt immer erstellt, vor Livegang generiert und eingereicht, und
+laufend auf Aktualität geprüft (neue/entfernte Seiten werden nachgezogen).
+noindex von Staging vor Produktivsetzung entfernen.
+
+### Bildformat/-technik
+
+WebP oder AVIF, width/height im HTML gesetzt (verhindert Layout-Sprünge),
+Lazy Loading nur unterhalb des sichtbaren Bereichs.
+
+### Mobile/Touch
+
+Touch-Elemente mind. 48×48px, Fließtext mind. 16px, korrekter
+Viewport-Meta-Tag, keine störenden Interstitials auf Mobilgeräten.
 
 ## Analytics
 
-Cloudflare Web Analytics: Standard bei jedem Projekt, immer aktivieren (im Cloudflare-Dashboard, kein Kundenzugriff nötig). Cookielos, keine Einwilligung/Cookie-Banner-Eintrag nötig.
-
-Google Analytics (GA4): Nur zusätzlich einbauen, wenn in PROJEKT.md Abschnitt E "Google Analytics (GA4) zusätzlich gewünscht" mit ja beantwortet ist (z. B. bei SEA-Kunden wegen Google-Ads-Verknüpfung). Falls ja: fällt unter Kategorie "Statistik" im Cookie-Banner, lädt technisch erst nach entsprechender Einwilligung — nicht nur optisch blockiert. Rechtstext dafür liefert eRecht24 (Datenschutzerklärung), die technische Ladesperre ist Aufgabe des Codes.
+Cloudflare Web Analytics — Standard bei jedem Projekt, immer aktivieren (im
+Cloudflare-Dashboard). Cookielos, keine Einwilligung/Cookie-Banner-Eintrag
+nötig. Kein Google Analytics (GA4) mehr — Doppel-Tracking wird vermieden.
 
 ## Sprungmarken-Navigation
 
-Bei Unterseiten mit mehreren sinnvollen Unterthemen — nur wenn es zum Design und Seiteninhalt passt, nicht erzwingen: Übersichtsmenü direkt unter dem Hero einbauen. Klick scrollt sanft (smooth scroll) zur passenden Section auf derselben Seite, keine neue URL. Aktives Unterthema beim Scrollen optisch hervorheben (Scroll-Spy).
+Bei Unterseiten mit mehreren sinnvollen Unterthemen — nur wenn es zum
+Design und Seiteninhalt passt, nicht erzwingen: Übersichtsmenü direkt unter
+dem Hero einbauen. Klick scrollt sanft (smooth scroll) zur passenden
+Section auf derselben Seite, keine neue URL. Aktives Unterthema beim
+Scrollen optisch hervorheben (Scroll-Spy).
 
 ## Seitenaufbau und Pflichtseiten
 
-### Navbar
-
-Maximal 5–7 Hauptpunkte in der Hauptnavigation. Rechtsseiten (Impressum, Datenschutzerklärung, Cookie-Einstellungen) gehören nicht in die Navbar, sondern ausschließlich in den Footer.
-
 ### Breadcrumb
 
-Ab der zweiten Ebene (also ab Unterseiten, die selbst wieder Unterseiten haben, z. B. Leistungen > Leistungsdetail) ist eine Breadcrumb-Navigation Pflicht. Auf der Startseite und auf Seiten der ersten Ebene nicht nötig. Technisch als BreadcrumbList (JSON-LD) UND sichtbar im HTML umsetzen, nicht nur strukturierte Daten ohne sichtbare Breadcrumb.
+Ab der zweiten Ebene (also ab Unterseiten, die selbst wieder Unterseiten
+haben, z. B. Leistungen > Leistungsdetail) ist eine Breadcrumb-Navigation
+Pflicht. Auf der Startseite und auf Seiten der ersten Ebene nicht nötig.
+Technisch als BreadcrumbList (JSON-LD) UND sichtbar im HTML umsetzen, nicht
+nur strukturierte Daten ohne sichtbare Breadcrumb.
 
 ### Footer — Pflichtinhalt
 
-Navigation (Kurzlinks zu den Hauptseiten), Kontaktdaten, Social-Media-Links (falls vorhanden), alle Rechtslinks (Impressum, Datenschutzerklärung, Cookie-Einstellungen).
+Navigation (Kurzlinks zu den Hauptseiten), Kontaktdaten, Social-Media-Links
+(falls vorhanden), alle Rechtslinks (Impressum, Datenschutzerklärung,
+Cookie-Einstellungen).
 
 ### Pflichtseiten — dürfen nie fehlen
 
-Diese Seiten müssen in JEDEM Projekt angelegt und verlinkt werden, unabhängig davon, ob sie in PROJEKT.md Abschnitt G explizit aufgeführt sind:
+Diese Seiten MÜSSEN in JEDEM Projekt angelegt und verlinkt werden:
 
 | Seite | Pflichtgrund | Platzierung |
 |---|---|---|
 | Impressum | § 5 DDG — leicht erkennbar, unmittelbar erreichbar, ständig verfügbar | Footer, jede Seite |
 | Datenschutzerklärung | Art. 13/14 DSGVO — nennt alle tatsächlich genutzten Dienste | Footer, jede Seite |
-| Cookie-Einstellungen | Widerruf muss so einfach sein wie die Erteilung — dauerhafter Link nötig, nicht nur das Banner | Footer, jede Seite |
-| 404-Seite | Kein Rechtsgrund, aber Pflicht in der QA | — |
-| Danke-Seite | Eigene URL für Conversion-Tracking in GA4 und Google Ads | nach Formularabsendung |
+| Cookie-Einstellungen | Widerruf muss so einfach sein wie die Erteilung — dauerhafter Link nötig | Footer, jede Seite |
+| 404-Seite | Pflicht in der QA | — |
+| Danke-Seite | Eigene URL für Conversion-Tracking | nach Formularabsendung |
 
-Optional je nach Geschäftsmodell zusätzlich: AGB (bei Verkauf), Widerrufsbelehrung (bei Verbrauchern).
+Optional je nach Geschäftsmodell zusätzlich: AGB (bei Verkauf),
+Widerrufsbelehrung (bei Verbrauchern).
 
-Rechtsseiten nicht auf noindex setzen — ein vollständiges Impressum ist ein Vertrauenssignal.
+Rechtsseiten nicht auf noindex setzen — ein vollständiges Impressum ist ein
+Vertrauenssignal.
 
-Inhalt von Impressum und Datenschutzerklärung kommt von eRecht24 (siehe Abschnitt "Urheberrecht und Rechtsgrundlagen") — dieser Abschnitt hier regelt nur, DASS die Seiten angelegt und korrekt verlinkt werden müssen, nicht deren Rechtstext.
+## eRecht24-Anbindung (Impressum & Datenschutzerklärung)
 
-## Standard-Seitenstrukturen
+Impressum und Datenschutzerklärung werden über eine automatische
+eRecht24-Anbindung eingebunden, nicht manuell kopiert. Bei jedem
+Projekt-Abschluss und bei jeder Änderung, die die Datenschutzerklärung
+betreffen könnte (neue Dienste, neue Tracking-/Analytics-Tools, neue
+Formulare, neue Drittanbieter-Einbindungen), MUSS geprüft werden, ob die
+eRecht24-Inhalte noch vollständig und aktuell sind. Wird eine Lücke oder
+ein Fehler festgestellt, wird der Nutzer aktiv darauf hingewiesen — nie
+stillschweigend übergangen.
 
-Regel: In PROJEKT.md Abschnitt G steht bei jeder Seite ein Feld "Sections". Enthält dieses Feld das Wort "Standard" (z. B. "Standard" allein, oder "Standard, aber ohne Testimonials"), wird die unten passende Standard-Reihenfolge für diesen Seitentyp verwendet, mit den genannten Abweichungen umgesetzt. Enthält das Feld stattdessen eine vollständige eigene Sections-Liste (kein "Standard" darin), wird ausschließlich diese eigene Liste verwendet, kein Rückgriff auf den Standard.
+## Pflicht-Rückfrage bei Unsicherheit
 
-Eine Section ohne echten Inhalt wird gestrichen, nicht mit Füllmaterial bestückt. Die Reihenfolge ist eine Dramaturgie, keine beliebige Liste — nicht ohne Grund verschieben.
+**Rechtliche Themen** = alles, was mit Datenschutz (DSGVO/TTDSG),
+Impressumspflicht, Cookie-Einwilligung, Urheberrecht/Lizenzen,
+Widerrufsrecht oder AGB zu tun hat.
 
-### Startseite
+**Technische Themen** = alles, was die Funktionsfähigkeit, Sicherheit oder
+Erreichbarkeit der Website betrifft (z. B. DNS/Domain, Formular-Sicherheit,
+Hosting-Konfiguration, Datenverlust-Risiko).
 
-Hero (Keyword + Ort + Nutzen, primärer CTA direkt hier) → Vertrauen & Informationsvermittlung (Logos, Siegel, Zahlen) → Konkreter Kundennutzen (aus Kundensicht) → Leistungen Preview (Teaser) → CTA (früh) → Vorteile/USPs → Testimonials → Über uns Preview (kurz) → FAQ (Einwände, meist Preis/Dauer/Einzugsgebiet) → CTA (wiederholt den primären CTA aus dem Hero)
+Bei jedem dieser beiden Themenbereiche gilt: Ist nicht eindeutig klar, wie
+korrekt vorzugehen ist, wird der Nutzer IMMER vorher gefragt — es wird nie
+eigenständig geraten oder eine Annahme getroffen. Im Zweifel gilt: lieber
+einmal zu oft nachfragen als zu wenig. Auch bei nur leichter Unsicherheit
+wird nachgefragt, statt eigenständig zu entscheiden.
 
-### Leistungen (Übersicht)
+## Pflicht-Abschlussprüfung
 
-Header/Hero → Leistungsübersicht → Kundennutzen und Mehrwert → Einzelne Leistungen (verlinkt auf Detailseiten) → Preise (falls Preise genannt werden dürfen) → Prozess/Arbeitsweise → Vorteile/USPs → CTA
+Vor Livegang UND am Ende jedes Projekts werden alle rechtlichen und
+technischen Pflichtpunkte dieser Datei vollständig durchgeprüft — keine
+Ausnahme, kein Überspringen, kein "wird schon passen".
 
-### Leistung — Detailseite
+## Performance- und Darstellungsqualität
 
-Header/Hero (eigenes Fokus-Keyword je Leistung) → Problem/Herausforderung → Lösung/Leistungsbeschreibung → Kundennutzen, Ergebnisse und Vorteile (zusammen) → Ablauf/Prozess → Beispiele/Ergebnisse → Passende Referenzen → FAQ → Anfrage-CTA
+Nach jedem Build-Schritt aktiv auf folgende Probleme prüfen, nicht nur
+dokumentieren, sondern beheben:
 
-### Über uns
+**Jank:** Ruckeln beim Scrollen oder bei Animationen, Seite läuft nicht
+flüssig. Ursache meist zu teure Animationen (nicht GPU-beschleunigt) oder
+blockierender JavaScript-Code während des Scrollens.
 
-Header/Hero → Wer wir sind und für wen → Menschen/Team (echte Gesichter statt Stockfotos) → Unternehmensgeschichte → Mission und Vision → Werte → Unternehmenskultur → CTA
-
-### Referenzen (Übersicht)
-
-Header/Hero → Projektübersicht → Kategorien/Filter (erst ab ca. 8 Projekten) → Projektkarten → CTA
-
-### Referenz — Detailseite (optional, nur mit Freigabe Kundenname und messbarem Ergebnis)
-
-Projekt-Header → Kunde → Ausgangssituation → Herausforderung → Lösung → Umsetzung → Ergebnisse mit konkreter Zahl → Bilder/Galerie → Kundenstimme → Weitere Projekte → CTA
-
-### Kontakt
-
-Header/Hero (kurz) → Kontaktdaten (NAP zeichengenau wie im Google-Profil) → Kontaktformular/Anfrageformular → Ansprechpartner (Foto und Name) → Öffnungszeiten/Erreichbarkeit → Interaktive Karte/Anfahrt (lädt erst nach Einwilligung) → FAQ Preview → Social Media Links
-
-### FAQ (eigene Seite, nur wenn genug Fragen zusammenkommen — sonst als Section auf Startseite/Leistungsseiten)
-
-Header/Hero → Fragen nach Themen gruppiert → CTA
-Kein FAQPage-Schema anlegen — seit Mai 2026 ohne Wirkung in den Suchergebnissen.
-
-### Galerie/Portfolio (optional, für visuell überzeugende Branchen)
-
-Header/Hero → Kurze Einordnung (ein Absatz) → Kategorien/Filter (erst ab ca. 20 Bildern) → Bildraster (Lazy Loading, erstes Bild nie lazy) → Lightbox/Detailansicht (tastaturbedienbar) → CTA
-Jedes Bild braucht einen echten Alt-Text.
-
-### Karriere
-
-Header/Hero → Warum bei uns? → Unternehmenskultur → Benefits → Team-Einblicke → Offene Stellen (JobPosting-Schema je Stelle) → Bewerbungsprozess → Bewerbung-CTA
-
-### Blog
-
-Nur anlegen, wenn ein Redaktions-Retainer vereinbart ist — ohne laufende Redaktionsleistung entfällt die Seite komplett.
-Header/Hero → Kategorien → Featured Artikel → Artikel-Übersicht → Newsletter (Double-Opt-in nötig) → Footer
-
-## Performance- und Darstellungsqualität — immer prüfen und beheben
-
-Nach jedem Build-Schritt aktiv auf folgende Probleme prüfen, nicht nur dokumentieren, sondern beheben:
-
-Jank: Ruckeln beim Scrollen oder bei Animationen, Seite läuft nicht flüssig. Ursache meist zu teure Animationen (nicht GPU-beschleunigt) oder blockierender JavaScript-Code während des Scrollens.
-
-Glitch: Kurzer visueller Fehler oder Flackern auf dem Bildschirm. Ursache meist Render-Konflikte oder fehlerhafte CSS-Übergänge.
-
-(CLS-Zielwert ≤0,1 steht bereits weiter oben unter Performance — gilt weiterhin.)
+**Glitch:** Kurzer visueller Fehler oder Flackern auf dem Bildschirm.
+Ursache meist Render-Konflikte oder fehlerhafte CSS-Übergänge.
 
 ## Urheberrecht und Rechtsgrundlagen — Code-relevant
 
-Texte: Niemals Text, Code oder Bilder von Referenzseiten oder Wettbewerbern 1:1 übernehmen. Stil-Idee inspirieren lassen ist erlaubt, Kopieren nicht — auch nicht bei Platzhaltertexten oder Fallback-Texten (Button-Beschriftungen, Fehlermeldungen).
+### Texte und Code
 
-Bilder: Ausschließlich aus Unsplash, Pexels oder Nano Banana. Keine Bilder von Referenzseiten oder aus Google-Bildersuche übernehmen.
+Texte NIEMALS 1:1 von Referenzseiten oder Wettbewerbern übernehmen — auch
+nicht als Platzhalter. Stil-Idee inspirieren lassen ist erlaubt, Kopieren
+nicht. Code darf 1:1 übernommen werden (rechtlich unbedenklich, Layout ist
+nicht geschützt).
 
-Cookies und Tracking: Rechtsgrundlage ist § 25 TTDSG (Einwilligungspflicht für Cookies/lokale Speicherung) in Verbindung mit der DSGVO (Rechtsgrundlage der Datenverarbeitung selbst). Kein Tracking-Skript, kein Drittanbieter-Request (Google Fonts, Maps, YouTube-Embed, Analytics, Social-Widgets) darf laden, bevor eine aktive Einwilligung vorliegt — nicht nur optisch blockiert, sondern technisch unterbunden.
+### Bildquellen
 
-Cookie-Banner: Mindestens die Kategorien Notwendig, Statistik und Marketing einzeln auswählbar (nicht nur Alles-an/Alles-aus), sofern mehr als eine Kategorie eingesetzt wird. Ablehnen genauso einfach erreichbar wie Zustimmen — ein Klick, kein Dark Pattern.
+Ausschließlich aus Unsplash, Pexels oder Nano Banana. Bilder von
+Referenzseiten oder aus der Google-Bildersuche NIE übernehmen, auch nicht
+übergangsweise.
 
-Formulardaten: Nur die tatsächlich benötigten Felder abfragen (Datenminimierung), keine Daten an Drittanbieter ohne Nennung in der Datenschutzerklärung senden.
+### Cookies und Tracking
 
-## Kundenseitig editierbare Inhalte
+Rechtsgrundlage ist § 25 TTDSG (Einwilligungspflicht für Cookies/lokale
+Speicherung) in Verbindung mit der DSGVO. Kein Tracking-Skript, kein
+Drittanbieter-Request (Fonts, Maps, YouTube-Embed, Analytics,
+Social-Widgets) darf laden, bevor eine aktive Einwilligung vorliegt —
+technisch unterbunden, nicht nur optisch blockiert.
 
-Nur einrichten, wenn in PROJEKT.md Abschnitt E "Self-Service-Content-Paket gewünscht" mit ja beantwortet ist.
+### Formulardaten
 
-Falls ja: Pages CMS einsetzen (kostenlos, Git-basiert, arbeitet direkt mit dem GitHub-Repo, kein zusätzlicher Server, kein zusätzlicher Account außer GitHub) für Team, Blog, Hinweisbanner.
-
-Umsetzung: Werte (Name, Foto, Text, An/Aus) werden nie fest in Komponenten/HTML geschrieben, sondern immer aus einer eigenen Datendatei gelesen (z. B. team.json, blog/*.md, banner.json). Der Code liest diese Dateien nur aus — dieselbe Trennung von Daten und Code wie bei PROJEKT.md/CONTENT.md.
-
-Eine Konfigurationsdatei (.pages.yml) legt fest, welche Felder in der CMS-Oberfläche sichtbar sind. Bodytext der Kernseiten (Startseite, Leistungen, Über uns, Kontakt) wird NIE als Feld freigegeben — bleibt gesperrt, nur über den normalen Build-Prozess änderbar.
-
-Änderungen des Kunden gehen automatisch live (Cloudflare baut nach jedem Speichern neu), keine Freigabe-Stufe nötig für Team/Blog/Banner.
-
-Größere Änderungen (neue Seiten, Struktur, Design, Kernseiten-Texte) laufen weiterhin nur über die Agentur, nicht über das CMS.
-
-Falls nein: kein Pages-CMS-Setup, keine Datendatei-Trennung nötig — normaler Build wie gewohnt.
+Nur die tatsächlich benötigten Felder abfragen (Datenminimierung), keine
+Daten an Drittanbieter ohne Nennung in der Datenschutzerklärung senden.
